@@ -1,5 +1,5 @@
 ### Before start
-To run this service u should have a prepared postgresql database. Properties are in artifacts/application.properties
+To run this service you should have a prepared postgresql database. Properties are in artifacts/application.properties
 
 ### How to start:
 
