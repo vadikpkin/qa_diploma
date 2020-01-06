@@ -4,8 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Dao {
-    public static String getLastStatusNotCredit() throws SQLException {
-        try (Connection cn = ConnectionFactory.getConnection();
+    public static String getLastStatusNotCredit(DataBase dataBase) throws SQLException {
+        try (Connection cn = ConnectionFactory.getConnection(dataBase);
              Statement st = cn.createStatement()) {
             try (ResultSet rs = st.executeQuery("select status from payment_entity order by created;")) {
                 ArrayList<String> codes = new ArrayList<>();
@@ -17,8 +17,8 @@ public class Dao {
         }
     }
 
-    public static String getLastStatusCredit() throws SQLException {
-        try (Connection cn = ConnectionFactory.getConnection();
+    public static String getLastStatusCredit(DataBase dataBase) throws SQLException {
+        try (Connection cn = ConnectionFactory.getConnection(dataBase);
              Statement st = cn.createStatement()) {
             try (ResultSet rs = st.executeQuery("select status from credit_request_entity order by created;")) {
                 ArrayList<String> codes = new ArrayList<>();

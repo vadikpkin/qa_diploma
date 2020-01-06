@@ -27,6 +27,7 @@ dependencies {
     compile group: 'com.github.javafaker', name: 'javafaker', version: '0.16'
     testImplementation'io.qameta.allure:allure-selenide:2.13.0'
     compile group: 'org.postgresql', name: 'postgresql', version: '42.2.8'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.17'
 
 }
 

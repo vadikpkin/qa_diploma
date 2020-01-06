@@ -1,5 +1,6 @@
 import data.DataHelper;
 import database.Dao;
+import database.DataBase;
 import objects.Credit;
 import objects.NotCredit;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ public class MainTest {
         cardInfo = cardInfo.getApprovedCardInfo();
         notCredit.submitInfo(cardInfo);
         notCredit.verifySubmitOk();
-        assertEquals("APPROVED", Dao.getLastStatusNotCredit());
+        assertEquals("APPROVED", Dao.getLastStatusNotCredit(DataBase.POSTGRESQL));
     }
 
     @Test
@@ -35,7 +36,7 @@ public class MainTest {
         cardInfo = cardInfo.getDeclinedCardInfo();
         notCredit.submitInfo(cardInfo);
         notCredit.verifySubmitDecline();
-        assertEquals("DECLINED", Dao.getLastStatusNotCredit());
+        assertEquals("DECLINED", Dao.getLastStatusNotCredit(DataBase.MYSQL));
     }
 
     @Test
@@ -60,7 +61,7 @@ public class MainTest {
         cardInfo = cardInfo.getApprovedCardInfo();
         credit.submitInfo(cardInfo);
         credit.verifySubmitOk();
-        assertEquals("APPROVED", Dao.getLastStatusCredit());
+        assertEquals("APPROVED", Dao.getLastStatusCredit(DataBase.MYSQL));
     }
 
     @Test
@@ -72,7 +73,7 @@ public class MainTest {
         cardInfo = cardInfo.getDeclinedCardInfo();
         credit.submitInfo(cardInfo);
         credit.verifySubmitDecline();
-        assertEquals("DECLINED", Dao.getLastStatusCredit());
+        assertEquals("DECLINED", Dao.getLastStatusCredit(DataBase.MYSQL));
     }
 // Tests unknown card purchase
     @Test
@@ -86,6 +87,5 @@ public class MainTest {
         credit.submitInfo(cardInfo);
         credit.verifySubmitDecline();
     }
-
 
 }
