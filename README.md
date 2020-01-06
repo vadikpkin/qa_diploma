@@ -11,4 +11,6 @@ that will container with node.js app on your 9999 port.
 ``` java -jar aqa-shop.jar ```
 that will execute java app on your 8080 port
 
+### Testing plan
 
+To check testing plan go to [Plan.md](https://github.com/vadikpkin/qa_diploma/blob/master/Plan.md)
