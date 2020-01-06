@@ -16,7 +16,7 @@ public class MainTest {
     private static final String URL = "http://localhost:8080/";
     ///Tests for NOT credit purchase
     @Test
-    void shouldSubmitNotCreditRequestApprovedCardPostgresSql() throws SQLException {
+    void shouldSubmitNotCreditRequestApprovedCard() throws SQLException {
         open(URL);
         StartPage startPage = new StartPage();
         NotCredit notCredit = startPage.buy();
@@ -28,7 +28,7 @@ public class MainTest {
     }
 
     @Test
-    void shouldDeclineNotCreditRequestDeclinedCardPostgresSql() throws SQLException {
+    void shouldDeclineNotCreditRequestDeclinedCard() throws SQLException {
         open(URL);
         StartPage startPage = new StartPage();
         NotCredit notCredit = startPage.buy();
@@ -40,7 +40,7 @@ public class MainTest {
     }
 
     @Test
-    void shouldDeclineNotCreditRequestUnknownCardPostgresSql() {
+    void shouldDeclineNotCreditRequestUnknownCard() {
         open(URL);
         StartPage startPage = new StartPage();
         NotCredit notCredit = startPage.buy();
@@ -53,7 +53,7 @@ public class MainTest {
 
     ///Tests for credit purchase
     @Test
-    void shouldSubmitCreditRequestApprovedCardPostgresSql() throws SQLException {
+    void shouldSubmitCreditRequestApprovedCard() throws SQLException {
         open(URL);
         StartPage startPage = new StartPage();
         Credit credit = startPage.buyCredit();
@@ -61,11 +61,11 @@ public class MainTest {
         cardInfo = cardInfo.getApprovedCardInfo();
         credit.submitInfo(cardInfo);
         credit.verifySubmitOk();
-        assertEquals("APPROVED", Dao.getLastStatusCredit(DataBase.MYSQL));
+        assertEquals("APPROVED", Dao.getLastStatusCredit(DataBase.POSTGRESQL));
     }
 
     @Test
-    void shouldDeclineCreditRequestDeclinedCardPostgresSql() throws SQLException {
+    void shouldDeclineCreditRequestDeclinedCard() throws SQLException {
         open(URL);
         StartPage startPage = new StartPage();
         Credit credit = startPage.buyCredit();
@@ -73,11 +73,11 @@ public class MainTest {
         cardInfo = cardInfo.getDeclinedCardInfo();
         credit.submitInfo(cardInfo);
         credit.verifySubmitDecline();
-        assertEquals("DECLINED", Dao.getLastStatusCredit(DataBase.MYSQL));
+        assertEquals("DECLINED", Dao.getLastStatusCredit(DataBase.POSTGRESQL));
     }
 // Tests unknown card purchase
     @Test
-    void shouldDeclineCreditRequestUnknownCardPostgresSql() {
+    void shouldDeclineCreditRequestUnknownCard() {
         open(URL);
         StartPage startPage = new StartPage();
         Credit credit = startPage.buyCredit();
