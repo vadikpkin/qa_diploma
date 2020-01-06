@@ -36,7 +36,7 @@ public class MainTest {
         cardInfo = cardInfo.getDeclinedCardInfo();
         notCredit.submitInfo(cardInfo);
         notCredit.verifySubmitDecline();
-        assertEquals("DECLINED", Dao.getLastStatusNotCredit(DataBase.MYSQL));
+        assertEquals("DECLINED", Dao.getLastStatusNotCredit(DataBase.POSTGRESQL));
     }
 
     @Test
