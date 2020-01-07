@@ -9,7 +9,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import objects.StartPage;
 
+import javax.swing.text.DateFormatter;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,7 +34,7 @@ public class MainTest {
         cardInfo = cardInfo.getApprovedCardInfo();
         notCredit.submitInfo(cardInfo);
         notCredit.verifySubmitOk();
-        assertEquals("APPROVED", Dao.getLastStatusNotCredit(DataBase.POSTGRESQL));
+        assertEquals("APPROVED", Dao.getLastStatusNotCredit(DataBase.MYSQL));
     }
 
     @Test
@@ -41,7 +47,7 @@ public class MainTest {
         cardInfo = cardInfo.getDeclinedCardInfo();
         notCredit.submitInfo(cardInfo);
         notCredit.verifySubmitDecline();
-        assertEquals("DECLINED", Dao.getLastStatusNotCredit(DataBase.POSTGRESQL));
+        assertEquals("DECLINED", Dao.getLastStatusNotCredit(DataBase.MYSQL));
     }
 
     @Test
@@ -66,7 +72,7 @@ public class MainTest {
         cardInfo = cardInfo.getApprovedCardInfo();
         credit.submitInfo(cardInfo);
         credit.verifySubmitOk();
-        assertEquals("APPROVED", Dao.getLastStatusCredit(DataBase.POSTGRESQL));
+        assertEquals("APPROVED", Dao.getLastStatusCredit(DataBase.MYSQL));
     }
 
     @Test
@@ -79,7 +85,7 @@ public class MainTest {
         cardInfo = cardInfo.getDeclinedCardInfo();
         credit.submitInfo(cardInfo);
         credit.verifySubmitDecline();
-        assertEquals("DECLINED", Dao.getLastStatusCredit(DataBase.POSTGRESQL));
+        assertEquals("DECLINED", Dao.getLastStatusCredit(DataBase.MYSQL));
     }
 
     @Test
@@ -101,7 +107,7 @@ public class MainTest {
         StartPage startPage = new StartPage();
         NotCredit notCredit = startPage.buyCredit();
         DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
-        cardInfo = cardInfo.getUnknownCardInfo();
+        cardInfo = cardInfo.getApprovedCardInfo();
         Faker faker = new Faker();
         cardInfo.setCardNumber(faker.finance().creditCard(CreditCardType.AMERICAN_EXPRESS));
         notCredit.submitInfo(cardInfo);
@@ -115,11 +121,78 @@ public class MainTest {
         StartPage startPage = new StartPage();
         NotCredit notCredit = startPage.buyCredit();
         DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
-        cardInfo = cardInfo.getUnknownCardInfo();
-        Faker faker = new Faker();
+        cardInfo = cardInfo.getApprovedCardInfo();
         cardInfo.setMonth("2");
         notCredit.submitInfo(cardInfo);
-        notCredit.verifyWrongCardFormat();
+        notCredit.verifyWrongMonthFormat();
     }
 
+    @Test
+    @DisplayName("Оплата тура. Поле 'Владелец' введено кириллицей")
+    void shouldDeclineRequestForOwnerWrongFormatCyrillicInput(){
+        open(URL);
+        StartPage startPage = new StartPage();
+        NotCredit notCredit = startPage.buyCredit();
+        DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
+        cardInfo = cardInfo.getApprovedCardInfo();
+        Faker faker = new Faker(new Locale("ru-RU"));
+        cardInfo.setOwner(faker.name().fullName());
+        notCredit.submitInfo(cardInfo);
+        notCredit.verifyWrongOwnerFormat();
+    }
+
+    @Test
+    @DisplayName("Оплата тура. В поле 'Владелец' введены только цифры")
+    void shouldDeclineRequestForOwnerWrongFormatNumbersInput(){
+        open(URL);
+        StartPage startPage = new StartPage();
+        NotCredit notCredit = startPage.buyCredit();
+        DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
+        cardInfo = cardInfo.getApprovedCardInfo();
+        Faker faker = new Faker(new Locale("ru-RU"));
+        cardInfo.setOwner("3123124");
+        notCredit.submitInfo(cardInfo);
+        notCredit.verifyWrongOwnerFormat();
+    }
+
+    @Test
+    @DisplayName("Оплата тура. В поле 'Владеле' введены спецсимволы")
+    void shouldDeclineRequestForOwnerWrongFormatInputSpecialCharsInput(){
+        open(URL);
+        StartPage startPage = new StartPage();
+        NotCredit notCredit = startPage.buyCredit();
+        DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
+        cardInfo = cardInfo.getApprovedCardInfo();
+        cardInfo.setOwner("!!!%%%%%???");
+        notCredit.submitInfo(cardInfo);
+        notCredit.verifyWrongOwnerFormat();
+    }
+
+    @Test
+    @DisplayName("Оплата тура картой, действие которой закончилось")
+    void shouldDeclineRequestForExpiderCard(){
+        open(URL);
+        StartPage startPage = new StartPage();
+        NotCredit notCredit = startPage.buyCredit();
+        DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
+        cardInfo = cardInfo.getApprovedCardInfo();
+        Faker faker = new Faker();
+        cardInfo.setYear(Integer.valueOf(LocalDate.now().minusYears(2).format(DateTimeFormatter.ofPattern("yy"))));
+        notCredit.submitInfo(cardInfo);
+        notCredit.verifyYearExpired();
+    }
+
+    @Test
+    @DisplayName("Оплата тура. В поле 'CVV' введен слишком короткий код")
+    void shouldDeclineRequestForWrongCvv(){
+        open(URL);
+        StartPage startPage = new StartPage();
+        NotCredit notCredit = startPage.buyCredit();
+        DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
+        cardInfo = cardInfo.getApprovedCardInfo();
+        Faker faker = new Faker();
+        cardInfo.setCvv(faker.number().numberBetween(10, 99));
+        notCredit.submitInfo(cardInfo);
+        notCredit.verifyWrongCvv();
+    }
 }

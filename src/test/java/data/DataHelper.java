@@ -16,7 +16,7 @@ public class DataHelper {
         String month;
         int year;
         String owner;
-        int csv;
+        int cvv;
     public CardInfo getApprovedCardInfo() {
         CardInfo cardInfo = new CardInfo();
         cardInfo.setCardNumber("4444 4444 4444 4441");
@@ -24,7 +24,7 @@ public class DataHelper {
         cardInfo.setMonth("04");
         cardInfo.setYear(24);
         cardInfo.setOwner(faker.name().fullName());
-        cardInfo.setCsv(faker.number().numberBetween(100, 999));
+        cardInfo.setCvv(faker.number().numberBetween(100, 999));
         return cardInfo;
     }
 
@@ -35,7 +35,7 @@ public class DataHelper {
         cardInfo.setMonth("04");
         cardInfo.setYear(24);
         cardInfo.setOwner(faker.name().fullName());
-        cardInfo.setCsv(faker.number().numberBetween(100, 999));
+        cardInfo.setCvv(faker.number().numberBetween(100, 999));
         return cardInfo;
     }
 
@@ -46,7 +46,7 @@ public class DataHelper {
         cardInfo.setMonth("04");
         cardInfo.setYear(24);
         cardInfo.setOwner(faker.name().fullName());
-        cardInfo.setCsv(faker.number().numberBetween(100, 999));
+        cardInfo.setCvv(faker.number().numberBetween(100, 999));
         return cardInfo;
     }
 
