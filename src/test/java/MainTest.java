@@ -1,8 +1,11 @@
+import com.github.javafaker.CreditCardType;
+import com.github.javafaker.Faker;
 import data.DataHelper;
 import database.Dao;
 import database.DataBase;
 import objects.Credit;
 import objects.NotCredit;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import objects.StartPage;
 
@@ -14,8 +17,9 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class MainTest {
     private static final String URL = "http://localhost:8080/";
-    ///Tests for NOT credit purchase
+
     @Test
+    @DisplayName("Оплата тура НЕ в кредит с использованием карты со статусом 'APPROVED'")
     void shouldSubmitNotCreditRequestApprovedCard() throws SQLException {
         open(URL);
         StartPage startPage = new StartPage();
@@ -28,6 +32,7 @@ public class MainTest {
     }
 
     @Test
+    @DisplayName("Оплата тура НЕ в кредит с использованием карты со статусом 'DECLINED'.")
     void shouldDeclineNotCreditRequestDeclinedCard() throws SQLException {
         open(URL);
         StartPage startPage = new StartPage();
@@ -40,19 +45,19 @@ public class MainTest {
     }
 
     @Test
+    @DisplayName("Оплата тура НЕ в кредит с использованием неизвестной карты.")
     void shouldDeclineNotCreditRequestUnknownCard() {
         open(URL);
         StartPage startPage = new StartPage();
         NotCredit notCredit = startPage.buy();
         DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
-        cardInfo = cardInfo.getDeclinedCardInfo();
-        cardInfo.setCardNumber("4444 4444 4444 4443");
+        cardInfo = cardInfo.getUnknownCardInfo();
         notCredit.submitInfo(cardInfo);
         notCredit.verifySubmitDecline();
     }
 
-    ///Tests for credit purchase
     @Test
+    @DisplayName("Оплата тура в кредит с использованием карты со статусом 'APPROVED'")
     void shouldSubmitCreditRequestApprovedCard() throws SQLException {
         open(URL);
         StartPage startPage = new StartPage();
@@ -65,6 +70,7 @@ public class MainTest {
     }
 
     @Test
+    @DisplayName("Оплата тура в кредит с использованием карты со статусом 'DECLINED'")
     void shouldDeclineCreditRequestDeclinedCard() throws SQLException {
         open(URL);
         StartPage startPage = new StartPage();
@@ -75,17 +81,31 @@ public class MainTest {
         credit.verifySubmitDecline();
         assertEquals("DECLINED", Dao.getLastStatusCredit(DataBase.POSTGRESQL));
     }
-// Tests unknown card purchase
+
     @Test
+    @DisplayName("Оплата тура в кредит с использованием неизвестной карты")
     void shouldDeclineCreditRequestUnknownCard() {
         open(URL);
         StartPage startPage = new StartPage();
         Credit credit = startPage.buyCredit();
         DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
-        cardInfo = cardInfo.getDeclinedCardInfo();
-        cardInfo.setCardNumber("4444 4444 4444 4443");
+        cardInfo = cardInfo.getUnknownCardInfo();
         credit.submitInfo(cardInfo);
         credit.verifySubmitDecline();
+    }
+
+    @Test
+    @DisplayName("Оплата тура с использование карты неверного формата")
+    void shouldDeclineRequestForCardWrongFormat(){
+        open(URL);
+        StartPage startPage = new StartPage();
+        NotCredit notCredit = startPage.buyCredit();
+        DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
+        cardInfo = cardInfo.getUnknownCardInfo();
+        Faker faker = new Faker();
+        cardInfo.setCardNumber(faker.finance().creditCard(CreditCardType.AMERICAN_EXPRESS));
+        notCredit.submitInfo(cardInfo);
+        notCredit.verifyWrongCardFormat();
     }
 
 }

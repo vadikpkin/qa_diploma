@@ -18,6 +18,11 @@ public class NotCredit {
     private static SelenideElement submitBtn = $(new Selectors.ByText("Продолжить"));
     private static SelenideElement okNotification = $(By.className("notification_status_ok"));
     private static SelenideElement errorNotification = $(By.className("notification_status_error"));
+    private static SelenideElement wrongCardFormatNotification = $$(".input__sub").get(0);
+    private static SelenideElement wrongMonthFormatNotification = $$(".input__sub").get(1);
+    private static SelenideElement wrongYearNotification = $$(".input__sub").get(2);
+    private static SelenideElement wrongOwnerNameNotification = $$(".input__sub").get(3);
+    private static SelenideElement wrongCsvNotification = $$(".input__sub").get(4);
 
 
     public void submitInfo(DataHelper.CardInfo info) {
@@ -37,6 +42,10 @@ public class NotCredit {
     public void verifySubmitDecline() {
         errorNotification.waitUntil(Condition.visible, 15000).shouldHave(Condition.text("Ошибка"));
         okNotification.shouldBe(Condition.hidden);
+    }
+
+    public void verifyWrongCardFormat(){
+        wrongCardFormatNotification.shouldHave(Condition.visible).shouldHave(Condition.text("Неверный формат"));
     }
 
 }
