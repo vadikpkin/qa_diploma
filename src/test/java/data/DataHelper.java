@@ -3,6 +3,9 @@ package data;
 import com.github.javafaker.CreditCardType;
 import com.github.javafaker.Faker;
 import lombok.Data;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class DataHelper {
@@ -21,8 +24,8 @@ public class DataHelper {
         CardInfo cardInfo = new CardInfo();
         cardInfo.setCardNumber("4444 4444 4444 4441");
         Faker faker = new Faker(new Locale("en-US"));
-        cardInfo.setMonth("04");
-        cardInfo.setYear(24);
+        cardInfo.setMonth(String.valueOf(LocalDate.now().format(DateTimeFormatter.ofPattern("MM"))));
+        cardInfo.setYear(Integer.valueOf(LocalDate.now().plusYears(2).format(DateTimeFormatter.ofPattern("yy"))));
         cardInfo.setOwner(faker.name().fullName());
         cardInfo.setCvv(faker.number().numberBetween(100, 999));
         return cardInfo;
@@ -32,8 +35,8 @@ public class DataHelper {
         CardInfo cardInfo = new CardInfo();
         cardInfo.setCardNumber("4444 4444 4444 4442");
         Faker faker = new Faker(new Locale("en-US"));
-        cardInfo.setMonth("04");
-        cardInfo.setYear(24);
+        cardInfo.setMonth(String.valueOf(LocalDate.now().format(DateTimeFormatter.ofPattern("MM"))));
+        cardInfo.setYear(Integer.valueOf(LocalDate.now().plusYears(2).format(DateTimeFormatter.ofPattern("yy"))));
         cardInfo.setOwner(faker.name().fullName());
         cardInfo.setCvv(faker.number().numberBetween(100, 999));
         return cardInfo;
@@ -43,8 +46,8 @@ public class DataHelper {
         CardInfo cardInfo = new CardInfo();
         Faker faker = new Faker(new Locale("en-US"));
         cardInfo.setCardNumber(faker.finance().creditCard(CreditCardType.MASTERCARD));
-        cardInfo.setMonth("04");
-        cardInfo.setYear(24);
+        cardInfo.setMonth(String.valueOf(LocalDate.now().format(DateTimeFormatter.ofPattern("MM"))));
+        cardInfo.setYear(Integer.valueOf(LocalDate.now().plusYears(2).format(DateTimeFormatter.ofPattern("yy"))));
         cardInfo.setOwner(faker.name().fullName());
         cardInfo.setCvv(faker.number().numberBetween(100, 999));
         return cardInfo;
