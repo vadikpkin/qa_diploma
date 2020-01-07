@@ -108,4 +108,18 @@ public class MainTest {
         notCredit.verifyWrongCardFormat();
     }
 
+    @Test
+    @DisplayName("Оплата тура. Месяц введен в неправильном формате - 'm' вместо 'mm'")
+    void shouldDeclineRequestForMonthWrongFormat(){
+        open(URL);
+        StartPage startPage = new StartPage();
+        NotCredit notCredit = startPage.buyCredit();
+        DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
+        cardInfo = cardInfo.getUnknownCardInfo();
+        Faker faker = new Faker();
+        cardInfo.setMonth("2");
+        notCredit.submitInfo(cardInfo);
+        notCredit.verifyWrongCardFormat();
+    }
+
 }

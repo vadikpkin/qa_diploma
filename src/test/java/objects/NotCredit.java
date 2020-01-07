@@ -48,4 +48,8 @@ public class NotCredit {
         wrongCardFormatNotification.shouldHave(Condition.visible).shouldHave(Condition.text("Неверный формат"));
     }
 
+    public void verifyWrongMonthFormat(){
+        wrongMonthFormatNotification.shouldHave(Condition.visible).shouldHave(Condition.text("Неверный формат"));
+    }
+
 }
