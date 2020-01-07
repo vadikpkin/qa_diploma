@@ -9,8 +9,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class DataHelper {
-    String approvedCardNumber = "4444 4444 4444 4441";
-    String declinedCardNumber =  "4444 4444 4444 4442";
+    private static String approvedCardNumber = "4444 4444 4444 4441";
+    private static String declinedCardNumber =  "4444 4444 4444 4442";
 
 
     @Data
@@ -22,7 +22,7 @@ public class DataHelper {
         int cvv;
     public CardInfo getApprovedCardInfo() {
         CardInfo cardInfo = new CardInfo();
-        cardInfo.setCardNumber("4444 4444 4444 4441");
+        cardInfo.setCardNumber(approvedCardNumber);
         Faker faker = new Faker(new Locale("en-US"));
         cardInfo.setMonth(String.valueOf(LocalDate.now().format(DateTimeFormatter.ofPattern("MM"))));
         cardInfo.setYear(Integer.valueOf(LocalDate.now().plusYears(2).format(DateTimeFormatter.ofPattern("yy"))));
@@ -33,7 +33,7 @@ public class DataHelper {
 
     public CardInfo getDeclinedCardInfo() {
         CardInfo cardInfo = new CardInfo();
-        cardInfo.setCardNumber("4444 4444 4444 4442");
+        cardInfo.setCardNumber(declinedCardNumber);
         Faker faker = new Faker(new Locale("en-US"));
         cardInfo.setMonth(String.valueOf(LocalDate.now().format(DateTimeFormatter.ofPattern("MM"))));
         cardInfo.setYear(Integer.valueOf(LocalDate.now().plusYears(2).format(DateTimeFormatter.ofPattern("yy"))));

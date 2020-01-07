@@ -149,7 +149,6 @@ public class MainTest {
         NotCredit notCredit = startPage.buyCredit();
         DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
         cardInfo = cardInfo.getApprovedCardInfo();
-        Faker faker = new Faker(new Locale("ru-RU"));
         cardInfo.setOwner("3123124");
         notCredit.submitInfo(cardInfo);
         notCredit.verifyWrongOwnerFormat();
@@ -176,7 +175,6 @@ public class MainTest {
         NotCredit notCredit = startPage.buyCredit();
         DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
         cardInfo = cardInfo.getApprovedCardInfo();
-        Faker faker = new Faker();
         cardInfo.setYear(Integer.valueOf(LocalDate.now().minusYears(2).format(DateTimeFormatter.ofPattern("yy"))));
         notCredit.submitInfo(cardInfo);
         notCredit.verifyYearExpired();
