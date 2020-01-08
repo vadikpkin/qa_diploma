@@ -18,7 +18,7 @@ docker-compose up -d
  docker-compose -f docker-compose-mysql.yml up -d
  ``` 
 
- P.S. You must change artifacts/application.properties for each of databases. Also you must change some code:
+ You must change artifacts/application.properties for each of databases. Also you must change some code:
  * go to qa_diploma/src/test/java/MainTest.java
  * to use mysql set 
   ``` java
