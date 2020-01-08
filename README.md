@@ -24,7 +24,7 @@ docker-compose up -d
 java -jar aqa-shop.jar 
 ```
 
-5 . open terminal and and type ```./gradlew test``` or ```./gradlew.bat test,``` for Windows.
+5 . open terminal and and type ```./gradlew test``` or ```./gradlew.bat test``` for Windows.
 
 
 ### Testing plan
