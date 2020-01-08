@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+  mysql:
+    image: mysql:8.0.18
+    restart: always
+    expose:
+      - '3306'
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysqp-data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: "app"
+      MYSQL_USER: "admin"
+      MYSQL_PASSWORD: "password"
+      MYSQL_ROOT_PASSWORD: "password"

@@ -12,7 +12,6 @@ public class DataHelper {
     private static String approvedCardNumber = "4444 4444 4444 4441";
     private static String declinedCardNumber =  "4444 4444 4444 4442";
 
-
     @Data
     public static class CardInfo {
         String cardNumber;
@@ -20,6 +19,7 @@ public class DataHelper {
         int year;
         String owner;
         int cvv;
+
     public CardInfo getApprovedCardInfo() {
         CardInfo cardInfo = new CardInfo();
         cardInfo.setCardNumber(approvedCardNumber);

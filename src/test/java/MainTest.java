@@ -23,6 +23,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class MainTest {
     private static final String URL = "http://localhost:8080/";
+    private static final DataBase dataBase = DataBase.MYSQL;
 
     @Test
     @DisplayName("Оплата тура НЕ в кредит с использованием карты со статусом 'APPROVED'")
@@ -34,7 +35,8 @@ public class MainTest {
         cardInfo = cardInfo.getApprovedCardInfo();
         notCredit.submitInfo(cardInfo);
         notCredit.verifySubmitOk();
-        assertEquals("APPROVED", Dao.getLastStatusNotCredit(DataBase.MYSQL));
+        assertEquals("APPROVED", Dao.getLastStatusNotCredit(dataBase));
+        assertEquals(Dao.getLastOrderId(dataBase), Dao.getLastTransactionId(dataBase));
     }
 
     @Test
@@ -47,7 +49,8 @@ public class MainTest {
         cardInfo = cardInfo.getDeclinedCardInfo();
         notCredit.submitInfo(cardInfo);
         notCredit.verifySubmitDecline();
-        assertEquals("DECLINED", Dao.getLastStatusNotCredit(DataBase.MYSQL));
+        assertEquals("DECLINED", Dao.getLastStatusNotCredit(dataBase));
+        assertEquals(Dao.getLastOrderId(dataBase), Dao.getLastTransactionId(dataBase));
     }
 
     @Test
@@ -72,7 +75,8 @@ public class MainTest {
         cardInfo = cardInfo.getApprovedCardInfo();
         credit.submitInfo(cardInfo);
         credit.verifySubmitOk();
-        assertEquals("APPROVED", Dao.getLastStatusCredit(DataBase.MYSQL));
+        assertEquals("APPROVED", Dao.getLastStatusCredit(dataBase));
+        assertEquals(Dao.getLastOrderId(dataBase), Dao.getLastBankId(dataBase));
     }
 
     @Test
@@ -85,7 +89,8 @@ public class MainTest {
         cardInfo = cardInfo.getDeclinedCardInfo();
         credit.submitInfo(cardInfo);
         credit.verifySubmitDecline();
-        assertEquals("DECLINED", Dao.getLastStatusCredit(DataBase.MYSQL));
+        assertEquals("DECLINED", Dao.getLastStatusCredit(dataBase));
+        assertEquals(Dao.getLastOrderId(dataBase), Dao.getLastBankId(dataBase));
     }
 
     @Test
