@@ -12,6 +12,9 @@ public class Dao {
                 while (rs.next()) {
                     codes.add(rs.getString("status"));
                 }
+
+                if(codes.isEmpty()) return "table is empty";
+
                 return codes.get(codes.size() - 1);
             }
         }
@@ -25,6 +28,9 @@ public class Dao {
                 while (rs.next()) {
                     codes.add(rs.getString("status"));
                 }
+
+                if(codes.isEmpty()) return "table is empty";
+
                 return codes.get(codes.size() - 1);
             }
         }
@@ -38,6 +44,9 @@ public class Dao {
                 while (rs.next()) {
                     codes.add(rs.getString("transaction_id"));
                 }
+
+                if(codes.isEmpty()) return "table is empty";
+
                 return codes.get(codes.size() - 1);
             }
         }
@@ -51,6 +60,9 @@ public class Dao {
                 while (rs.next()) {
                     codes.add(rs.getString("bank_id"));
                 }
+
+                if(codes.isEmpty()) return "table is empty";
+
                 return codes.get(codes.size() - 1);
             }
         }
@@ -64,8 +76,39 @@ public class Dao {
                 while (rs.next()) {
                     codes.add(rs.getString("payment_id"));
                 }
+
+                if(codes.isEmpty()) return "table is empty";
+
                 return codes.get(codes.size() - 1);
             }
         }
     }
+
+    public static void clearOrderEntityTable(DataBase dataBase) throws SQLException {
+        try (Connection cn = ConnectionFactory.getConnection(dataBase);
+             Statement st = cn.createStatement()) {
+            st.executeUpdate("delete from order_entity;");
+        }
+    }
+
+    public static void clearCreditRequestEntityTable(DataBase dataBase) throws SQLException {
+        try (Connection cn = ConnectionFactory.getConnection(dataBase);
+             Statement st = cn.createStatement()) {
+            st.executeUpdate("delete from credit_request_entity;");
+        }
+    }
+
+    public static void clearPaymentEntityTable(DataBase dataBase) throws SQLException {
+        try (Connection cn = ConnectionFactory.getConnection(dataBase);
+             Statement st = cn.createStatement()) {
+            st.executeUpdate("delete from payment_entity;");
+        }
+    }
+
+    public static void clearAllTables(DataBase dataBase) throws SQLException{
+        clearPaymentEntityTable(dataBase);
+        clearCreditRequestEntityTable(dataBase);
+        clearOrderEntityTable(dataBase);
+    }
+
 }

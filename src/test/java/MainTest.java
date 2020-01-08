@@ -55,14 +55,17 @@ public class MainTest {
 
     @Test
     @DisplayName("Оплата тура НЕ в кредит с использованием неизвестной карты.")
-    void shouldDeclineNotCreditRequestUnknownCard() {
+    void shouldDeclineNotCreditRequestUnknownCard() throws SQLException {
         open(URL);
+        Dao.clearAllTables(dataBase);
         StartPage startPage = new StartPage();
         NotCredit notCredit = startPage.buy();
         DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
         cardInfo = cardInfo.getUnknownCardInfo();
         notCredit.submitInfo(cardInfo);
         notCredit.verifySubmitDecline();
+        assertEquals(Dao.getLastStatusNotCredit(dataBase), "table is empty");
+        assertEquals(Dao.getLastOrderId(dataBase), "table is empty");
     }
 
     @Test
@@ -95,14 +98,17 @@ public class MainTest {
 
     @Test
     @DisplayName("Оплата тура в кредит с использованием неизвестной карты")
-    void shouldDeclineCreditRequestUnknownCard() {
+    void shouldDeclineCreditRequestUnknownCard() throws SQLException {
         open(URL);
+        Dao.clearAllTables(dataBase);
         StartPage startPage = new StartPage();
         Credit credit = startPage.buyCredit();
         DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
         cardInfo = cardInfo.getUnknownCardInfo();
         credit.submitInfo(cardInfo);
         credit.verifySubmitDecline();
+        assertEquals(Dao.getLastStatusCredit(dataBase), "table is empty");
+        assertEquals(Dao.getLastOrderId(dataBase), "table is empty");
     }
 
     @Test
