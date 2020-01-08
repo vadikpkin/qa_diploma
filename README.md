@@ -17,7 +17,17 @@ docker-compose up -d
  ``` 
  docker-compose -f docker-compose-mysql.yml up -d
  ``` 
- P.S. you should change artifacts/application.properties for each of databases
+
+ P.S. You must change artifacts/application.properties for each of databases. Also you must change some code:
+ * go to qa_diploma/src/test/java/MainTest.java
+ * to use mysql set 
+  ``` java
+ private static final DataBase dataBase = DataBase.MYSQL;
+  ``` 
+* to use postgresql set 
+ ``` java
+ private static final DataBase dataBase = DataBase.POSTGRESQL;
+ ``` 
 
 4 . run artifacts/aqa-shop.jar on you local host
 ``` 
