@@ -161,7 +161,7 @@ public class MainTest {
     }
 
     @Test
-    @DisplayName("Оплата тура. В поле 'Владеле' введены спецсимволы")
+    @DisplayName("Оплата тура. В поле 'Владелец' введены спецсимволы")
     void shouldDeclineRequestForOwnerWrongFormatInputSpecialCharsInput() {
         open(URL);
         StartPage startPage = new StartPage();

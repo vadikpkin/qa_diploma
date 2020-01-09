@@ -3,40 +3,48 @@
 
 1 . clone https://github.com/vadikpkin/qa_diploma
 
-2 . run docker container from folder 'artifacts/gate-simulator'
-``` 
-docker-compose up -d
-```
+* to use MySQL 
 
-3 . run docker container with database
- * to use PostgreSQL type this from root folder
- ``` 
- docker-compose -f docker-compose-postgresql.yml up -d
- ``` 
-* to use MySQL type this from root folder
- ``` 
- docker-compose -f docker-compose-mysql.yml up -d
- ``` 
+   1 .run docker container from folder 'artifacts/gate-simulator'
+    ``` 
+    docker-compose up -d
+    ```
+   2 . run docker container with MySQL 
+     ``` 
+    docker-compose -f docker-compose-mysql.yml up -d
+    ``` 
+   3 . run artifacts/aqa-shop.jar on you local host
+   ``` 
+   java -Dspring.datasource.url=jdbc:mysql://localhost:3306/app -jar aqa-shop.jar 
+   ```
 
- You must change artifacts/application.properties for each of databases. Also you must change some code:
- * go to qa_diploma/src/test/java/MainTest.java
- * to use mysql set 
-  ``` java
- private static final DataBase dataBase = DataBase.MYSQL;
-  ``` 
-* to use postgresql set 
- ``` java
- private static final DataBase dataBase = DataBase.POSTGRESQL;
- ``` 
+  4 . open terminal and and type 
+  ```
+  ./gradlew test -Ddb.url=jdbc:mysql://localhost:3306/app
+  ```
+  5 . check report at /build/reports/tests/test/index.html
 
-4 . run artifacts/aqa-shop.jar on you local host
-``` 
-java -jar aqa-shop.jar 
-```
+* to use PostgreSQL 
 
-5 . open terminal and and type ```./gradlew test``` or ```./gradlew.bat test``` for Windows.
+   1 .run docker container from folder 'artifacts/gate-simulator'
+    ``` 
+    docker-compose up -d
+    ```
+   2 . run docker container with MySQL 
+     ``` 
+    docker-compose -f docker-compose-postgresql.yml up -d
+    ``` 
+   3 . run artifacts/aqa-shop.jar on you local host
+   ``` 
+   java -Dspring.datasource.url=jdbc:postgresql://localhost:5432/app -jar aqa-shop.jar 
+   ```
 
-
+  4 . open terminal and and type 
+  ```
+  ./gradlew test -Ddb.url=jdbc:postgresql://localhost:5432/app
+  ```
+  5 . check report at /build/reports/tests/test/index.html  
+  
 ### Testing plan
 
 To check testing plan go to [Plan.md](https://github.com/vadikpkin/qa_diploma/blob/master/Plan.md)
