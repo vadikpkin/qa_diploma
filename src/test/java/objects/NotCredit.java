@@ -44,23 +44,23 @@ public class NotCredit {
         okNotification.shouldBe(Condition.hidden);
     }
 
-    public void verifyWrongCardFormat(){
+    public void verifyWrongCardFormat() {
         wrongCardFormatNotification.shouldHave(Condition.visible).shouldHave(Condition.text("Неверный формат"));
     }
 
-    public void verifyWrongMonthFormat(){
+    public void verifyWrongMonthFormat() {
         wrongMonthFormatNotification.shouldHave(Condition.visible).shouldHave(Condition.text("Неверный формат"));
     }
 
-    public void verifyWrongOwnerFormat(){
+    public void verifyWrongOwnerFormat() {
         wrongOwnerNameNotification.shouldHave(Condition.visible).shouldHave(Condition.text("Неверный формат"));
     }
 
-    public void verifyYearExpired(){
+    public void verifyYearExpired() {
         expiredYearNotification.shouldHave(Condition.visible).shouldHave(Condition.text("Истёк срок действия карты"));
     }
 
-    public void verifyWrongCvv(){
+    public void verifyWrongCvv() {
         wrongCvvNotification.shouldHave(Condition.visible).shouldHave(Condition.text("Неверный формат"));
     }
 

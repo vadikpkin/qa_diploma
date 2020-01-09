@@ -2,20 +2,16 @@ import com.github.javafaker.CreditCardType;
 import com.github.javafaker.Faker;
 import data.DataHelper;
 import database.Dao;
-import database.DataBase;
 import objects.Credit;
 import objects.NotCredit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import objects.StartPage;
 
-import javax.swing.text.DateFormatter;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,10 +19,9 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class MainTest {
     private static final String URL = "http://localhost:8080/";
-    private static final DataBase dataBase = DataBase.MYSQL;
 
     @Test
-    @DisplayName("Оплата тура НЕ в кредит с использованием карты со статусом 'APPROVED'")
+    @DisplayName("Оплата тура с использованием карты со статусом 'APPROVED'")
     void shouldSubmitNotCreditRequestApprovedCard() throws SQLException {
         open(URL);
         StartPage startPage = new StartPage();
@@ -35,12 +30,12 @@ public class MainTest {
         cardInfo = cardInfo.getApprovedCardInfo();
         notCredit.submitInfo(cardInfo);
         notCredit.verifySubmitOk();
-        assertEquals("APPROVED", Dao.getLastStatusNotCredit(dataBase));
-        assertEquals(Dao.getLastOrderId(dataBase), Dao.getLastTransactionId(dataBase));
+        assertEquals("APPROVED", Dao.getLastStatusNotCredit());
+        assertEquals(Dao.getLastOrderId(), Dao.getLastTransactionId());
     }
 
     @Test
-    @DisplayName("Оплата тура НЕ в кредит с использованием карты со статусом 'DECLINED'.")
+    @DisplayName("Оплата тура с использованием карты со статусом 'DECLINED'.")
     void shouldDeclineNotCreditRequestDeclinedCard() throws SQLException {
         open(URL);
         StartPage startPage = new StartPage();
@@ -49,23 +44,23 @@ public class MainTest {
         cardInfo = cardInfo.getDeclinedCardInfo();
         notCredit.submitInfo(cardInfo);
         notCredit.verifySubmitDecline();
-        assertEquals("DECLINED", Dao.getLastStatusNotCredit(dataBase));
-        assertEquals(Dao.getLastOrderId(dataBase), Dao.getLastTransactionId(dataBase));
+        assertEquals("DECLINED", Dao.getLastStatusNotCredit());
+        assertEquals(Dao.getLastOrderId(), Dao.getLastTransactionId());
     }
 
     @Test
-    @DisplayName("Оплата тура НЕ в кредит с использованием неизвестной карты.")
+    @DisplayName("Оплата тура с использованием неизвестной карты.")
     void shouldDeclineNotCreditRequestUnknownCard() throws SQLException {
         open(URL);
-        Dao.clearAllTables(dataBase);
+        Dao.clearAllTables();
         StartPage startPage = new StartPage();
         NotCredit notCredit = startPage.buy();
         DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
         cardInfo = cardInfo.getUnknownCardInfo();
         notCredit.submitInfo(cardInfo);
         notCredit.verifySubmitDecline();
-        assertEquals(Dao.getLastStatusNotCredit(dataBase), "table is empty");
-        assertEquals(Dao.getLastOrderId(dataBase), "table is empty");
+        assertEquals(Dao.getLastStatusNotCredit(), "table is empty");
+        assertEquals(Dao.getLastOrderId(), "table is empty");
     }
 
     @Test
@@ -78,8 +73,8 @@ public class MainTest {
         cardInfo = cardInfo.getApprovedCardInfo();
         credit.submitInfo(cardInfo);
         credit.verifySubmitOk();
-        assertEquals("APPROVED", Dao.getLastStatusCredit(dataBase));
-        assertEquals(Dao.getLastOrderId(dataBase), Dao.getLastBankId(dataBase));
+        assertEquals("APPROVED", Dao.getLastStatusCredit());
+        assertEquals(Dao.getLastOrderId(), Dao.getLastBankId());
     }
 
     @Test
@@ -92,28 +87,28 @@ public class MainTest {
         cardInfo = cardInfo.getDeclinedCardInfo();
         credit.submitInfo(cardInfo);
         credit.verifySubmitDecline();
-        assertEquals("DECLINED", Dao.getLastStatusCredit(dataBase));
-        assertEquals(Dao.getLastOrderId(dataBase), Dao.getLastBankId(dataBase));
+        assertEquals("DECLINED", Dao.getLastStatusCredit());
+        assertEquals(Dao.getLastOrderId(), Dao.getLastBankId());
     }
 
     @Test
     @DisplayName("Оплата тура в кредит с использованием неизвестной карты")
     void shouldDeclineCreditRequestUnknownCard() throws SQLException {
         open(URL);
-        Dao.clearAllTables(dataBase);
+        Dao.clearAllTables();
         StartPage startPage = new StartPage();
         Credit credit = startPage.buyCredit();
         DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
         cardInfo = cardInfo.getUnknownCardInfo();
         credit.submitInfo(cardInfo);
         credit.verifySubmitDecline();
-        assertEquals(Dao.getLastStatusCredit(dataBase), "table is empty");
-        assertEquals(Dao.getLastOrderId(dataBase), "table is empty");
+        assertEquals(Dao.getLastStatusCredit(), "table is empty");
+        assertEquals(Dao.getLastOrderId(), "table is empty");
     }
 
     @Test
     @DisplayName("Оплата тура с использование карты неверного формата")
-    void shouldDeclineRequestForCardWrongFormat(){
+    void shouldDeclineRequestForCardWrongFormat() {
         open(URL);
         StartPage startPage = new StartPage();
         NotCredit notCredit = startPage.buyCredit();
@@ -127,7 +122,7 @@ public class MainTest {
 
     @Test
     @DisplayName("Оплата тура. Месяц введен в неправильном формате - 'm' вместо 'mm'")
-    void shouldDeclineRequestForMonthWrongFormat(){
+    void shouldDeclineRequestForMonthWrongFormat() {
         open(URL);
         StartPage startPage = new StartPage();
         NotCredit notCredit = startPage.buyCredit();
@@ -140,7 +135,7 @@ public class MainTest {
 
     @Test
     @DisplayName("Оплата тура. Поле 'Владелец' введено кириллицей")
-    void shouldDeclineRequestForOwnerWrongFormatCyrillicInput(){
+    void shouldDeclineRequestForOwnerWrongFormatCyrillicInput() {
         open(URL);
         StartPage startPage = new StartPage();
         NotCredit notCredit = startPage.buyCredit();
@@ -154,7 +149,7 @@ public class MainTest {
 
     @Test
     @DisplayName("Оплата тура. В поле 'Владелец' введены только цифры")
-    void shouldDeclineRequestForOwnerWrongFormatNumbersInput(){
+    void shouldDeclineRequestForOwnerWrongFormatNumbersInput() {
         open(URL);
         StartPage startPage = new StartPage();
         NotCredit notCredit = startPage.buyCredit();
@@ -167,7 +162,7 @@ public class MainTest {
 
     @Test
     @DisplayName("Оплата тура. В поле 'Владеле' введены спецсимволы")
-    void shouldDeclineRequestForOwnerWrongFormatInputSpecialCharsInput(){
+    void shouldDeclineRequestForOwnerWrongFormatInputSpecialCharsInput() {
         open(URL);
         StartPage startPage = new StartPage();
         NotCredit notCredit = startPage.buyCredit();
@@ -180,7 +175,7 @@ public class MainTest {
 
     @Test
     @DisplayName("Оплата тура картой, действие которой закончилось")
-    void shouldDeclineRequestForExpiderCard(){
+    void shouldDeclineRequestForExpiderCard() {
         open(URL);
         StartPage startPage = new StartPage();
         NotCredit notCredit = startPage.buyCredit();
@@ -193,7 +188,7 @@ public class MainTest {
 
     @Test
     @DisplayName("Оплата тура. В поле 'CVV' введен слишком короткий код")
-    void shouldDeclineRequestForWrongCvv(){
+    void shouldDeclineRequestForWrongCvv() {
         open(URL);
         StartPage startPage = new StartPage();
         NotCredit notCredit = startPage.buyCredit();
