@@ -13,12 +13,12 @@
      ``` 
     docker-compose -f docker-compose-mysql.yml up -d
     ``` 
-   3 . run artifacts/aqa-shop.jar on you local host
+   3 . run artifacts/aqa-shop.jar on your local host
    ``` 
    java -Dspring.datasource.url=jdbc:mysql://localhost:3306/app -jar aqa-shop.jar 
    ```
 
-  4 . open terminal and and type 
+  4 . open terminal and type 
   ```
   ./gradlew test -Ddb.url=jdbc:mysql://localhost:3306/app
   ```
@@ -34,12 +34,12 @@
      ``` 
     docker-compose -f docker-compose-postgresql.yml up -d
     ``` 
-   3 . run artifacts/aqa-shop.jar on you local host
+   3 . run artifacts/aqa-shop.jar on your local host
    ``` 
    java -Dspring.datasource.url=jdbc:postgresql://localhost:5432/app -jar aqa-shop.jar 
    ```
 
-  4 . open terminal and and type 
+  4 . open terminal and type 
   ```
   ./gradlew test -Ddb.url=jdbc:postgresql://localhost:5432/app
   ```
