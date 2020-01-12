@@ -51,7 +51,7 @@
 
   5 . open terminal in root folder and type 
   ```
-  ./gradlew test -Ddb.url=jdbc:mysql://localhost:3306/app
+  ./gradlew test -Ddb.url=jdbc:postgresql://localhost:5432/app
   ```
   6 . check report at /build/reports/tests/test/index.html
 
