@@ -11,7 +11,7 @@
     ``` 
     sudo docker-compose -f ./artifacts/gate-simulator/docker-compose.yml up -d
     ```
-   3 . run docker container with MySQL from root folder
+   3 . run docker container with MySQL
      ``` 
     docker-compose -f docker-compose-mysql.yml up -d
     ``` 
@@ -37,7 +37,7 @@
     ``` 
     sudo docker-compose -f ./artifacts/gate-simulator/docker-compose.yml up -d
     ```
-   3 . run docker container with PostgreSQL from root folder
+   3 . run docker container with PostgreSQL
     ``` 
     docker-compose -f docker-compose-postgresql.yml up -d
     ``` 
