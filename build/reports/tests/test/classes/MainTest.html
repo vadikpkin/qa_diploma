@@ -23,7 +23,7 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">13</div>
+<div class="counter">14</div>
 <p>tests</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">1m44.07s</div>
+<div class="counter">1m50.87s</div>
 <p>duration</p>
 </div>
 </td>
@@ -51,7 +51,7 @@
 </td>
 <td>
 <div class="infoBox failures" id="successRate">
-<div class="percent">46%</div>
+<div class="percent">50%</div>
 <p>successful</p>
 </div>
 </td>
@@ -67,7 +67,10 @@
 <a href="#tab1">Tests</a>
 </li>
 <li>
-<a href="#tab2">Standard error</a>
+<a href="#tab2">Standard output</a>
+</li>
+<li>
+<a href="#tab3">Standard error</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
@@ -79,8 +82,8 @@
 <pre>com.codeborne.selenide.ex.ElementShould: Element should be visible {By.className: notification_status_error}
 Element: '&lt;div class=&quot;notification notification_status_error notification_has-closer notification_stick-to_right notification_theme_alfa-on-white&quot; displayed:false&gt;&lt;/div&gt;'
 Actual value: visible:false
-Screenshot: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578577318167.4.png
-Page source: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578577318167.4.html
+Screenshot: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578850545432.4.png
+Page source: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578850545432.4.html
 Timeout: 15 s.
 	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:72)
 	at com.codeborne.selenide.commands.Should.execute(Should.java:24)
@@ -89,8 +92,8 @@ Timeout: 15 s.
 	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:99)
 	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:65)
 	at com.sun.proxy.$Proxy14.waitUntil(Unknown Source)
-	at objects.NotCredit.verifySubmitDecline(NotCredit.java:43)
-	at MainTest.shouldDeclineCreditRequestDeclinedCard(MainTest.java:89)
+	at pages.CreditPaymentPage.verifySubmitDecline(CreditPaymentPage.java:43)
+	at MainTest.shouldDeclineCreditRequestDeclinedCard(MainTest.java:92)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -189,8 +192,8 @@ Timeout: 15 s.
 <pre>com.codeborne.selenide.ex.ElementShould: Element should be hidden {By.className: notification_status_ok}
 Element: '&lt;div class=&quot;notification notification_visible notification_status_ok notification_has-closer notification_stick-to_right notification_theme_alfa-on-white&quot;&gt;Успешно
 Операция одобрена Банком.&lt;/div&gt;'
-Screenshot: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578577278454.1.png
-Page source: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578577278454.1.html
+Screenshot: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578850505033.1.png
+Page source: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578850505033.1.html
 Timeout: 4 s.
 	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:72)
 	at com.codeborne.selenide.commands.Should.execute(Should.java:24)
@@ -199,8 +202,8 @@ Timeout: 4 s.
 	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:99)
 	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:65)
 	at com.sun.proxy.$Proxy14.shouldBe(Unknown Source)
-	at objects.NotCredit.verifySubmitDecline(NotCredit.java:44)
-	at MainTest.shouldDeclineCreditRequestUnknownCard(MainTest.java:104)
+	at pages.CreditPaymentPage.verifySubmitDecline(CreditPaymentPage.java:44)
+	at MainTest.shouldDeclineCreditRequestUnknownCard(MainTest.java:107)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -299,8 +302,8 @@ Timeout: 4 s.
 <pre>com.codeborne.selenide.ex.ElementShould: Element should be visible {By.className: notification_status_error}
 Element: '&lt;div class=&quot;notification notification_status_error notification_has-closer notification_stick-to_right notification_theme_alfa-on-white&quot; displayed:false&gt;&lt;/div&gt;'
 Actual value: visible:false
-Screenshot: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578577337204.5.png
-Page source: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578577337204.5.html
+Screenshot: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578850564397.5.png
+Page source: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578850564397.5.html
 Timeout: 15 s.
 	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:72)
 	at com.codeborne.selenide.commands.Should.execute(Should.java:24)
@@ -309,8 +312,8 @@ Timeout: 15 s.
 	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:99)
 	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:65)
 	at com.sun.proxy.$Proxy14.waitUntil(Unknown Source)
-	at objects.NotCredit.verifySubmitDecline(NotCredit.java:43)
-	at MainTest.shouldDeclineNotCreditRequestDeclinedCard(MainTest.java:46)
+	at pages.CreditPaymentPage.verifySubmitDecline(CreditPaymentPage.java:43)
+	at MainTest.shouldDeclineNotCreditRequestDeclinedCard(MainTest.java:49)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -409,8 +412,8 @@ Timeout: 15 s.
 <pre>com.codeborne.selenide.ex.ElementShould: Element should be hidden {By.className: notification_status_ok}
 Element: '&lt;div class=&quot;notification notification_visible notification_status_ok notification_has-closer notification_stick-to_right notification_theme_alfa-on-white&quot;&gt;Успешно
 Операция одобрена Банком.&lt;/div&gt;'
-Screenshot: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578577293029.2.png
-Page source: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578577293029.2.html
+Screenshot: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578850520010.2.png
+Page source: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578850520010.2.html
 Timeout: 4 s.
 	at com.codeborne.selenide.impl.WebElementSource.checkCondition(WebElementSource.java:72)
 	at com.codeborne.selenide.commands.Should.execute(Should.java:24)
@@ -419,8 +422,8 @@ Timeout: 4 s.
 	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:99)
 	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:65)
 	at com.sun.proxy.$Proxy14.shouldBe(Unknown Source)
-	at objects.NotCredit.verifySubmitDecline(NotCredit.java:44)
-	at MainTest.shouldDeclineNotCreditRequestUnknownCard(MainTest.java:61)
+	at pages.CreditPaymentPage.verifySubmitDecline(CreditPaymentPage.java:44)
+	at MainTest.shouldDeclineNotCreditRequestUnknownCard(MainTest.java:64)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -518,8 +521,8 @@ Timeout: 4 s.
 <span class="code">
 <pre>com.codeborne.selenide.ex.ElementNotFound: Element not found {.input__sub}
 Expected: visible
-Screenshot: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578577300837.3.png
-Page source: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578577300837.3.html
+Screenshot: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578850528309.3.png
+Page source: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578850528309.3.html
 Timeout: 4 s.
 Caused by: NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;.input__sub&quot;}
 	at com.codeborne.selenide.impl.WebElementSource.createElementNotFoundError(WebElementSource.java:37)
@@ -531,8 +534,8 @@ Caused by: NoSuchElementException: no such element: Unable to locate element: {&
 	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:99)
 	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:65)
 	at com.sun.proxy.$Proxy14.shouldHave(Unknown Source)
-	at objects.NotCredit.verifyWrongOwnerFormat(NotCredit.java:56)
-	at MainTest.shouldDeclineRequestForOwnerWrongFormatCyrillicInput(MainTest.java:147)
+	at pages.CreditPaymentPage.verifyWrongOwnerFormat(CreditPaymentPage.java:56)
+	at MainTest.shouldDeclineRequestForOwnerWrongFormatCyrillicInput(MainTest.java:150)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -627,8 +630,8 @@ For documentation on this error, please visit: https://www.seleniumhq.org/except
 Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
 System info: host: 'vadim-B85M-D3V', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '5.3.0-26-generic', java.version: '11.0.5'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 79.0.3945.88, chrome: {chromedriverVersion: 79.0.3945.36 (3582db32b3389..., userDataDir: /tmp/.com.google.Chrome.818BRy}, goog:chromeOptions: {debuggerAddress: localhost:37845}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
-Session ID: 05df2afd349fbfb8ea7d6f253b6c358d
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 79.0.3945.88, chrome: {chromedriverVersion: 79.0.3945.36 (3582db32b3389..., userDataDir: /tmp/.com.google.Chrome.H5zcQT}, goog:chromeOptions: {debuggerAddress: localhost:42893}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: 2bbb46e24d34e28d679289d67521ca9b
 *** Element info: {Using=css selector, value=.input__sub}
 	at jdk.internal.reflect.GeneratedConstructorAccessor12.newInstance(Unknown Source)
 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -656,8 +659,8 @@ Session ID: 05df2afd349fbfb8ea7d6f253b6c358d
 <span class="code">
 <pre>com.codeborne.selenide.ex.ElementNotFound: Element not found {.input__sub}
 Expected: visible
-Screenshot: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578577251314.0.png
-Page source: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578577251314.0.html
+Screenshot: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578850473211.0.png
+Page source: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578850473211.0.html
 Timeout: 4 s.
 Caused by: NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;.input__sub&quot;}
 	at com.codeborne.selenide.impl.WebElementSource.createElementNotFoundError(WebElementSource.java:37)
@@ -669,8 +672,8 @@ Caused by: NoSuchElementException: no such element: Unable to locate element: {&
 	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:99)
 	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:65)
 	at com.sun.proxy.$Proxy14.shouldHave(Unknown Source)
-	at objects.NotCredit.verifyWrongOwnerFormat(NotCredit.java:56)
-	at MainTest.shouldDeclineRequestForOwnerWrongFormatInputSpecialCharsInput(MainTest.java:173)
+	at pages.CreditPaymentPage.verifyWrongOwnerFormat(CreditPaymentPage.java:56)
+	at MainTest.shouldDeclineRequestForOwnerWrongFormatInputSpecialCharsInput(MainTest.java:176)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -765,8 +768,8 @@ For documentation on this error, please visit: https://www.seleniumhq.org/except
 Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
 System info: host: 'vadim-B85M-D3V', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '5.3.0-26-generic', java.version: '11.0.5'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 79.0.3945.88, chrome: {chromedriverVersion: 79.0.3945.36 (3582db32b3389..., userDataDir: /tmp/.com.google.Chrome.818BRy}, goog:chromeOptions: {debuggerAddress: localhost:37845}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
-Session ID: 05df2afd349fbfb8ea7d6f253b6c358d
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 79.0.3945.88, chrome: {chromedriverVersion: 79.0.3945.36 (3582db32b3389..., userDataDir: /tmp/.com.google.Chrome.H5zcQT}, goog:chromeOptions: {debuggerAddress: localhost:42893}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: 2bbb46e24d34e28d679289d67521ca9b
 *** Element info: {Using=css selector, value=.input__sub}
 	at jdk.internal.reflect.GeneratedConstructorAccessor12.newInstance(Unknown Source)
 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -794,8 +797,8 @@ Session ID: 05df2afd349fbfb8ea7d6f253b6c358d
 <span class="code">
 <pre>com.codeborne.selenide.ex.ElementNotFound: Element not found {.input__sub}
 Expected: visible
-Screenshot: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578577345011.6.png
-Page source: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578577345011.6.html
+Screenshot: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578850572249.6.png
+Page source: file:/home/vadim/IdeaProjects/qa_diploma/qa_diploma/build/reports/tests/1578850572249.6.html
 Timeout: 4 s.
 Caused by: NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;css selector&quot;,&quot;selector&quot;:&quot;.input__sub&quot;}
 	at com.codeborne.selenide.impl.WebElementSource.createElementNotFoundError(WebElementSource.java:37)
@@ -807,8 +810,8 @@ Caused by: NoSuchElementException: no such element: Unable to locate element: {&
 	at com.codeborne.selenide.impl.SelenideElementProxy.dispatchAndRetry(SelenideElementProxy.java:99)
 	at com.codeborne.selenide.impl.SelenideElementProxy.invoke(SelenideElementProxy.java:65)
 	at com.sun.proxy.$Proxy14.shouldHave(Unknown Source)
-	at objects.NotCredit.verifyWrongOwnerFormat(NotCredit.java:56)
-	at MainTest.shouldDeclineRequestForOwnerWrongFormatNumbersInput(MainTest.java:160)
+	at pages.CreditPaymentPage.verifyWrongOwnerFormat(CreditPaymentPage.java:56)
+	at MainTest.shouldDeclineRequestForOwnerWrongFormatNumbersInput(MainTest.java:163)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -903,8 +906,8 @@ For documentation on this error, please visit: https://www.seleniumhq.org/except
 Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
 System info: host: 'vadim-B85M-D3V', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '5.3.0-26-generic', java.version: '11.0.5'
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 79.0.3945.88, chrome: {chromedriverVersion: 79.0.3945.36 (3582db32b3389..., userDataDir: /tmp/.com.google.Chrome.818BRy}, goog:chromeOptions: {debuggerAddress: localhost:37845}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
-Session ID: 05df2afd349fbfb8ea7d6f253b6c358d
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 79.0.3945.88, chrome: {chromedriverVersion: 79.0.3945.36 (3582db32b3389..., userDataDir: /tmp/.com.google.Chrome.H5zcQT}, goog:chromeOptions: {debuggerAddress: localhost:42893}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}
+Session ID: 2bbb46e24d34e28d679289d67521ca9b
 *** Element info: {Using=css selector, value=.input__sub}
 	at jdk.internal.reflect.GeneratedConstructorAccessor12.newInstance(Unknown Source)
 	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
@@ -939,105 +942,121 @@ Session ID: 05df2afd349fbfb8ea7d6f253b6c358d
 </tr>
 </thead>
 <tr>
+<td class="success">dsadsa()</td>
+<td class="success">dsadsa()</td>
+<td class="success">0.023s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
 <td class="failures">Оплата тура в кредит с использованием карты со статусом 'DECLINED'</td>
 <td class="failures">shouldDeclineCreditRequestDeclinedCard()</td>
-<td class="failures">17.266s</td>
+<td class="failures">17.091s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">Оплата тура в кредит с использованием неизвестной карты</td>
 <td class="failures">shouldDeclineCreditRequestUnknownCard()</td>
-<td class="failures">15.857s</td>
+<td class="failures">11.225s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">Оплата тура с использованием карты со статусом 'DECLINED'.</td>
 <td class="failures">shouldDeclineNotCreditRequestDeclinedCard()</td>
-<td class="failures">17.184s</td>
+<td class="failures">17.067s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">Оплата тура с использованием неизвестной карты.</td>
 <td class="failures">shouldDeclineNotCreditRequestUnknownCard()</td>
-<td class="failures">14.538s</td>
+<td class="failures">14.973s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="success">Оплата тура с использование карты неверного формата</td>
 <td class="success">shouldDeclineRequestForCardWrongFormat()</td>
-<td class="success">1.885s</td>
+<td class="success">1.900s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">Оплата тура картой, действие которой закончилось</td>
 <td class="success">shouldDeclineRequestForExpiderCard()</td>
-<td class="success">1.769s</td>
+<td class="success">2.176s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">Оплата тура. Месяц введен в неправильном формате - 'm' вместо 'mm'</td>
 <td class="success">shouldDeclineRequestForMonthWrongFormat()</td>
-<td class="success">1.770s</td>
+<td class="success">1.903s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="failures">Оплата тура. Поле 'Владелец' введено кириллицей</td>
 <td class="failures">shouldDeclineRequestForOwnerWrongFormatCyrillicInput()</td>
-<td class="failures">6.081s</td>
+<td class="failures">6.134s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">Оплата тура. В поле 'Владелец' введены спецсимволы</td>
 <td class="failures">shouldDeclineRequestForOwnerWrongFormatInputSpecialCharsInput()</td>
-<td class="failures">10.501s</td>
+<td class="failures">12.221s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="failures">Оплата тура. В поле 'Владелец' введены только цифры</td>
 <td class="failures">shouldDeclineRequestForOwnerWrongFormatNumbersInput()</td>
-<td class="failures">6.111s</td>
+<td class="failures">6.018s</td>
 <td class="failures">failed</td>
 </tr>
 <tr>
 <td class="success">Оплата тура. В поле 'CVV' введен слишком короткий код</td>
 <td class="success">shouldDeclineRequestForWrongCvv()</td>
-<td class="success">1.878s</td>
+<td class="success">1.964s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">Оплата тура в кредит с использованием карты со статусом 'APPROVED'</td>
 <td class="success">shouldSubmitCreditRequestApprovedCard()</td>
-<td class="success">3.749s</td>
+<td class="success">12.452s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">Оплата тура с использованием карты со статусом 'APPROVED'</td>
 <td class="success">shouldSubmitNotCreditRequestApprovedCard()</td>
-<td class="success">5.480s</td>
+<td class="success">5.719s</td>
 <td class="success">passed</td>
 </tr>
 </table>
 </div>
 <div id="tab2" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>Thu Oct 14 19:35:02 MSK 2021
+14
+10
+21
+</pre>
+</span>
+</div>
+<div id="tab3" class="tab">
 <h2>Standard error</h2>
 <span class="code">
-<pre>Jan 09, 2020 4:40:41 PM com.codeborne.selenide.drivercommands.LazyDriver getAndCheckWebDriver
+<pre>Jan 12, 2020 8:34:21 PM com.codeborne.selenide.drivercommands.LazyDriver getAndCheckWebDriver
 INFO: No webdriver is bound to current thread: 12 - let's create a new webdriver
-Starting ChromeDriver 79.0.3945.36 (3582db32b33893869b8c1339e8f4d9ed1816f143-refs/branch-heads/3945@{#614}) on port 4937
+Starting ChromeDriver 79.0.3945.36 (3582db32b33893869b8c1339e8f4d9ed1816f143-refs/branch-heads/3945@{#614}) on port 31253
 Only local connections are allowed.
 Please protect ports used by ChromeDriver and related test frameworks to prevent access by malicious code.
-Jan 09, 2020 4:40:43 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+Jan 12, 2020 8:34:24 PM org.openqa.selenium.remote.ProtocolHandshake createSession
 INFO: Detected dialect: W3C
-Jan 09, 2020 4:40:43 PM com.codeborne.selenide.webdriver.BrowserResizer adjustBrowserSize
+Jan 12, 2020 8:34:24 PM com.codeborne.selenide.webdriver.BrowserResizer adjustBrowserSize
 INFO: Set browser size to 1366x768
-Jan 09, 2020 4:40:43 PM com.codeborne.selenide.webdriver.WebDriverFactory logBrowserVersion
+Jan 12, 2020 8:34:24 PM com.codeborne.selenide.webdriver.WebDriverFactory logBrowserVersion
 INFO: BrowserName=chrome Version=79.0.3945.88 Platform=LINUX
-Jan 09, 2020 4:40:43 PM com.codeborne.selenide.webdriver.WebDriverFactory createWebDriver
+Jan 12, 2020 8:34:24 PM com.codeborne.selenide.webdriver.WebDriverFactory createWebDriver
 INFO: Selenide v. 5.3.1
-Jan 09, 2020 4:40:43 PM com.codeborne.selenide.webdriver.WebDriverFactory logSeleniumInfo
+Jan 12, 2020 8:34:24 PM com.codeborne.selenide.webdriver.WebDriverFactory logSeleniumInfo
 INFO: Selenium WebDriver v. 3.141.59 build time: 2018-11-14T08:17:03
-Jan 09, 2020 4:40:43 PM com.codeborne.selenide.drivercommands.CreateDriverCommand createDriver
-INFO: Create webdriver in current thread 12: ChromeDriver -&gt; ChromeDriver: chrome on LINUX (05df2afd349fbfb8ea7d6f253b6c358d)
+Jan 12, 2020 8:34:24 PM com.codeborne.selenide.drivercommands.CreateDriverCommand createDriver
+INFO: Create webdriver in current thread 12: ChromeDriver -&gt; ChromeDriver: chrome on LINUX (2bbb46e24d34e28d679289d67521ca9b)
 </pre>
 </span>
 </div>
@@ -1049,7 +1068,7 @@ INFO: Create webdriver in current thread 12: ChromeDriver -&gt; ChromeDriver: ch
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 5.2.1</a> at Jan 9, 2020, 4:42:25 PM</p>
+<a href="http://www.gradle.org">Gradle 5.2.1</a> at Jan 12, 2020, 8:36:12 PM</p>
 </div>
 </div>
 </body>

@@ -1,13 +1,12 @@
 import com.github.javafaker.CreditCardType;
 import com.github.javafaker.Faker;
-import data.DataHelper;
+import data.CardInfo;
 import database.Dao;
-import objects.Credit;
-import objects.NotCredit;
+import pages.PaymentPage;
+import pages.CreditPaymentPage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import objects.StartPage;
-
+import pages.StartPage;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -22,87 +21,87 @@ public class MainTest {
 
     @Test
     @DisplayName("Оплата тура с использованием карты со статусом 'APPROVED'")
-    void shouldSubmitNotCreditRequestApprovedCard() throws SQLException {
+    void shouldSubmitPaymentRequestApprovedCard() throws SQLException {
         open(URL);
         StartPage startPage = new StartPage();
-        NotCredit notCredit = startPage.buy();
-        DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
+        PaymentPage paymentPage = startPage.buy();
+        CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getApprovedCardInfo();
-        notCredit.submitInfo(cardInfo);
-        notCredit.verifySubmitOk();
-        assertEquals("APPROVED", Dao.getLastStatusNotCredit());
+        paymentPage.submitInfo(cardInfo);
+        paymentPage.verifySubmitOk();
+        assertEquals("APPROVED", Dao.getLastPaymentStatus());
         assertEquals(Dao.getLastOrderId(), Dao.getLastTransactionId());
     }
 
     @Test
     @DisplayName("Оплата тура с использованием карты со статусом 'DECLINED'.")
-    void shouldDeclineNotCreditRequestDeclinedCard() throws SQLException {
+    void shouldDeclinePaymentRequestDeclinedCard() throws SQLException {
         open(URL);
         StartPage startPage = new StartPage();
-        NotCredit notCredit = startPage.buy();
-        DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
+        PaymentPage paymentPage = startPage.buy();
+        CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getDeclinedCardInfo();
-        notCredit.submitInfo(cardInfo);
-        notCredit.verifySubmitDecline();
-        assertEquals("DECLINED", Dao.getLastStatusNotCredit());
+        paymentPage.submitInfo(cardInfo);
+        paymentPage.verifySubmitDecline();
+        assertEquals("DECLINED", Dao.getLastPaymentStatus());
         assertEquals(Dao.getLastOrderId(), Dao.getLastTransactionId());
     }
 
     @Test
     @DisplayName("Оплата тура с использованием неизвестной карты.")
-    void shouldDeclineNotCreditRequestUnknownCard() throws SQLException {
+    void shouldDeclinePaymentRequestUnknownCard() throws SQLException {
         open(URL);
         Dao.clearAllTables();
         StartPage startPage = new StartPage();
-        NotCredit notCredit = startPage.buy();
-        DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
+        PaymentPage paymentPage = startPage.buy();
+        CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getUnknownCardInfo();
-        notCredit.submitInfo(cardInfo);
-        notCredit.verifySubmitDecline();
-        assertEquals(Dao.getLastStatusNotCredit(), "table is empty");
+        paymentPage.submitInfo(cardInfo);
+        paymentPage.verifySubmitDecline();
+        assertEquals(Dao.getLastPaymentStatus(), "table is empty");
         assertEquals(Dao.getLastOrderId(), "table is empty");
     }
 
     @Test
     @DisplayName("Оплата тура в кредит с использованием карты со статусом 'APPROVED'")
-    void shouldSubmitCreditRequestApprovedCard() throws SQLException {
+    void shouldSubmitCreditPaymentRequestApprovedCard() throws SQLException {
         open(URL);
         StartPage startPage = new StartPage();
-        Credit credit = startPage.buyCredit();
-        DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
+        CreditPaymentPage creditPaymentPage = startPage.buyCredit();
+        CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getApprovedCardInfo();
-        credit.submitInfo(cardInfo);
-        credit.verifySubmitOk();
-        assertEquals("APPROVED", Dao.getLastStatusCredit());
+        creditPaymentPage.submitInfo(cardInfo);
+        creditPaymentPage.verifySubmitOk();
+        assertEquals("APPROVED", Dao.getLastCreditPaymentStatus());
         assertEquals(Dao.getLastOrderId(), Dao.getLastBankId());
     }
 
     @Test
     @DisplayName("Оплата тура в кредит с использованием карты со статусом 'DECLINED'")
-    void shouldDeclineCreditRequestDeclinedCard() throws SQLException {
+    void shouldDeclineCreditPaymentRequestDeclinedCard() throws SQLException {
         open(URL);
         StartPage startPage = new StartPage();
-        Credit credit = startPage.buyCredit();
-        DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
+        CreditPaymentPage creditPaymentPage = startPage.buyCredit();
+        CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getDeclinedCardInfo();
-        credit.submitInfo(cardInfo);
-        credit.verifySubmitDecline();
-        assertEquals("DECLINED", Dao.getLastStatusCredit());
+        creditPaymentPage.submitInfo(cardInfo);
+        creditPaymentPage.verifySubmitDecline();
+        assertEquals("DECLINED", Dao.getLastCreditPaymentStatus());
         assertEquals(Dao.getLastOrderId(), Dao.getLastBankId());
     }
 
     @Test
     @DisplayName("Оплата тура в кредит с использованием неизвестной карты")
-    void shouldDeclineCreditRequestUnknownCard() throws SQLException {
+    void shouldDeclineCreditPaymentRequestUnknownCard() throws SQLException {
         open(URL);
         Dao.clearAllTables();
         StartPage startPage = new StartPage();
-        Credit credit = startPage.buyCredit();
-        DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
+        CreditPaymentPage creditPaymentPage = startPage.buyCredit();
+        CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getUnknownCardInfo();
-        credit.submitInfo(cardInfo);
-        credit.verifySubmitDecline();
-        assertEquals(Dao.getLastStatusCredit(), "table is empty");
+        creditPaymentPage.submitInfo(cardInfo);
+        creditPaymentPage.verifySubmitDecline();
+        assertEquals(Dao.getLastCreditPaymentStatus(), "table is empty");
         assertEquals(Dao.getLastOrderId(), "table is empty");
     }
 
@@ -111,13 +110,13 @@ public class MainTest {
     void shouldDeclineRequestForCardWrongFormat() {
         open(URL);
         StartPage startPage = new StartPage();
-        NotCredit notCredit = startPage.buyCredit();
-        DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
+        CreditPaymentPage creditPaymentPage = startPage.buyCredit();
+        CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getApprovedCardInfo();
         Faker faker = new Faker();
         cardInfo.setCardNumber(faker.finance().creditCard(CreditCardType.AMERICAN_EXPRESS));
-        notCredit.submitInfo(cardInfo);
-        notCredit.verifyWrongCardFormat();
+        creditPaymentPage.submitInfo(cardInfo);
+        creditPaymentPage.verifyWrongCardFormat();
     }
 
     @Test
@@ -125,12 +124,12 @@ public class MainTest {
     void shouldDeclineRequestForMonthWrongFormat() {
         open(URL);
         StartPage startPage = new StartPage();
-        NotCredit notCredit = startPage.buyCredit();
-        DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
+        CreditPaymentPage creditPaymentPage = startPage.buyCredit();
+        CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getApprovedCardInfo();
         cardInfo.setMonth("2");
-        notCredit.submitInfo(cardInfo);
-        notCredit.verifyWrongMonthFormat();
+        creditPaymentPage.submitInfo(cardInfo);
+        creditPaymentPage.verifyWrongMonthFormat();
     }
 
     @Test
@@ -138,13 +137,13 @@ public class MainTest {
     void shouldDeclineRequestForOwnerWrongFormatCyrillicInput() {
         open(URL);
         StartPage startPage = new StartPage();
-        NotCredit notCredit = startPage.buyCredit();
-        DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
+        CreditPaymentPage creditPaymentPage = startPage.buyCredit();
+        CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getApprovedCardInfo();
         Faker faker = new Faker(new Locale("ru-RU"));
         cardInfo.setOwner(faker.name().fullName());
-        notCredit.submitInfo(cardInfo);
-        notCredit.verifyWrongOwnerFormat();
+        creditPaymentPage.submitInfo(cardInfo);
+        creditPaymentPage.verifyWrongOwnerFormat();
     }
 
     @Test
@@ -152,12 +151,12 @@ public class MainTest {
     void shouldDeclineRequestForOwnerWrongFormatNumbersInput() {
         open(URL);
         StartPage startPage = new StartPage();
-        NotCredit notCredit = startPage.buyCredit();
-        DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
+        CreditPaymentPage creditPaymentPage = startPage.buyCredit();
+        CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getApprovedCardInfo();
         cardInfo.setOwner("3123124");
-        notCredit.submitInfo(cardInfo);
-        notCredit.verifyWrongOwnerFormat();
+        creditPaymentPage.submitInfo(cardInfo);
+        creditPaymentPage.verifyWrongOwnerFormat();
     }
 
     @Test
@@ -165,12 +164,12 @@ public class MainTest {
     void shouldDeclineRequestForOwnerWrongFormatInputSpecialCharsInput() {
         open(URL);
         StartPage startPage = new StartPage();
-        NotCredit notCredit = startPage.buyCredit();
-        DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
+        CreditPaymentPage creditPaymentPage = startPage.buyCredit();
+        CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getApprovedCardInfo();
         cardInfo.setOwner("!!!%%%%%???");
-        notCredit.submitInfo(cardInfo);
-        notCredit.verifyWrongOwnerFormat();
+        creditPaymentPage.submitInfo(cardInfo);
+        creditPaymentPage.verifyWrongOwnerFormat();
     }
 
     @Test
@@ -178,12 +177,12 @@ public class MainTest {
     void shouldDeclineRequestForExpiderCard() {
         open(URL);
         StartPage startPage = new StartPage();
-        NotCredit notCredit = startPage.buyCredit();
-        DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
+        CreditPaymentPage creditPaymentPage = startPage.buyCredit();
+        CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getApprovedCardInfo();
         cardInfo.setYear(Integer.valueOf(LocalDate.now().minusYears(2).format(DateTimeFormatter.ofPattern("yy"))));
-        notCredit.submitInfo(cardInfo);
-        notCredit.verifyYearExpired();
+        creditPaymentPage.submitInfo(cardInfo);
+        creditPaymentPage.verifyYearExpired();
     }
 
     @Test
@@ -191,13 +190,13 @@ public class MainTest {
     void shouldDeclineRequestForWrongCvv() {
         open(URL);
         StartPage startPage = new StartPage();
-        NotCredit notCredit = startPage.buyCredit();
-        DataHelper.CardInfo cardInfo = new DataHelper.CardInfo();
+        CreditPaymentPage creditPaymentPage = startPage.buyCredit();
+        CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getApprovedCardInfo();
         Faker faker = new Faker();
         cardInfo.setCvv(faker.number().numberBetween(10, 99));
-        notCredit.submitInfo(cardInfo);
-        notCredit.verifyWrongCvv();
+        creditPaymentPage.submitInfo(cardInfo);
+        creditPaymentPage.verifyWrongCvv();
     }
 
 }

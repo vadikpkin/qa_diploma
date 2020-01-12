@@ -1,15 +1,15 @@
-package objects;
+package pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.SelenideElement;
-import data.DataHelper;
+import data.CardInfo;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class NotCredit {
+public class CreditPaymentPage {
     private static SelenideElement cardNumber = $("[placeholder='0000 0000 0000 0000']");
     private static SelenideElement month = $("[placeholder='08']");
     private static SelenideElement year = $("[placeholder='22']");
@@ -25,7 +25,7 @@ public class NotCredit {
     private static SelenideElement wrongCvvNotification = $(".input__sub");
 
 
-    public void submitInfo(DataHelper.CardInfo info) {
+    public void submitInfo(CardInfo info) {
         cardNumber.setValue(info.getCardNumber());
         month.setValue(String.valueOf(info.getMonth()));
         year.setValue(String.valueOf(info.getYear()));
