@@ -9,7 +9,7 @@
    
    2 . run docker container with a gate-service
     ``` 
-    sudo docker-compose -f ./artifacts/gate-simulator/docker-compose.yml up -d
+    docker-compose -f ./artifacts/gate-simulator/docker-compose.yml up -d
     ```
    3 . run docker container with MySQL
      ``` 
@@ -35,7 +35,7 @@
    
    2 . run docker container with gate-service
     ``` 
-    sudo docker-compose -f ./artifacts/gate-simulator/docker-compose.yml up -d
+    docker-compose -f ./artifacts/gate-simulator/docker-compose.yml up -d
     ```
    3 . run docker container with PostgreSQL
     ``` 
