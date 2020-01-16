@@ -2,201 +2,185 @@ import com.github.javafaker.CreditCardType;
 import com.github.javafaker.Faker;
 import data.CardInfo;
 import database.Dao;
-import pages.PaymentPage;
+import org.junit.jupiter.api.BeforeEach;
 import pages.CreditPaymentPage;
+import pages.PaymentPage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pages.StartPage;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import static com.codeborne.selenide.Selenide.*;
 
 public class MainTest {
     private static final String URL = "http://localhost:8080/";
 
+    @BeforeEach
+    void clearAll() {
+       Dao.clearAllTables();
+       open(URL);
+    }
+
     @Test
     @DisplayName("Оплата тура с использованием карты со статусом 'APPROVED'")
-    void shouldSubmitPaymentRequestApprovedCard() throws SQLException {
-        open(URL);
-        StartPage startPage = new StartPage();
-        PaymentPage paymentPage = startPage.buy();
+    void shouldSubmitPaymentRequestApprovedCard() {
+        PaymentPage paymentPage = new PaymentPage();
         CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getApprovedCardInfo();
-        paymentPage.submitInfo(cardInfo);
-        paymentPage.verifySubmitOk();
-        assertEquals("APPROVED", Dao.getLastPaymentStatus());
-        assertEquals(Dao.getLastOrderId(), Dao.getLastTransactionId());
+        paymentPage.getPaymentTypeSwitcher().buy();
+        paymentPage.getPaymentForm().submitInfo(cardInfo);
+        paymentPage.getPaymentForm().verifySubmitOk();
+        assertTrue(Dao.acceptApprovedPayment());
     }
 
     @Test
     @DisplayName("Оплата тура с использованием карты со статусом 'DECLINED'.")
-    void shouldDeclinePaymentRequestDeclinedCard() throws SQLException {
-        open(URL);
-        StartPage startPage = new StartPage();
-        PaymentPage paymentPage = startPage.buy();
+    void shouldDeclinePaymentRequestDeclinedCard() {
+        PaymentPage paymentPage = new PaymentPage();
         CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getDeclinedCardInfo();
-        paymentPage.submitInfo(cardInfo);
-        paymentPage.verifySubmitDecline();
-        assertEquals("DECLINED", Dao.getLastPaymentStatus());
-        assertEquals(Dao.getLastOrderId(), Dao.getLastTransactionId());
+        paymentPage.getPaymentTypeSwitcher().buy();
+        paymentPage.getPaymentForm().submitInfo(cardInfo);
+        paymentPage.getPaymentForm().verifySubmitDecline();
+        assertTrue(Dao.acceptDeclinedPayment());
     }
 
     @Test
     @DisplayName("Оплата тура с использованием неизвестной карты.")
-    void shouldDeclinePaymentRequestUnknownCard() throws SQLException {
-        open(URL);
-        Dao.clearAllTables();
-        StartPage startPage = new StartPage();
-        PaymentPage paymentPage = startPage.buy();
+    void shouldDeclinePaymentRequestUnknownCard() {
+        PaymentPage paymentPage = new PaymentPage();
         CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getUnknownCardInfo();
-        paymentPage.submitInfo(cardInfo);
-        paymentPage.verifySubmitDecline();
-        assertEquals(Dao.getLastPaymentStatus(), "table is empty");
-        assertEquals(Dao.getLastOrderId(), "table is empty");
+        paymentPage.getPaymentTypeSwitcher().buy();
+        paymentPage.getPaymentForm().submitInfo(cardInfo);
+        paymentPage.getPaymentForm().verifySubmitDecline();
+        assertTrue(Dao.acceptDeclinedPayment());
     }
 
     @Test
     @DisplayName("Оплата тура в кредит с использованием карты со статусом 'APPROVED'")
-    void shouldSubmitCreditPaymentRequestApprovedCard() throws SQLException {
-        open(URL);
-        StartPage startPage = new StartPage();
-        CreditPaymentPage creditPaymentPage = startPage.buyCredit();
+    void shouldSubmitCreditPaymentRequestApprovedCard() {
+        CreditPaymentPage creditPaymentPage = new CreditPaymentPage();
         CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getApprovedCardInfo();
-        creditPaymentPage.submitInfo(cardInfo);
-        creditPaymentPage.verifySubmitOk();
-        assertEquals("APPROVED", Dao.getLastCreditPaymentStatus());
-        assertEquals(Dao.getLastOrderId(), Dao.getLastBankId());
+        creditPaymentPage.getPaymentTypeSwitcher().buyCredit();
+        creditPaymentPage.getPaymentForm().submitInfo(cardInfo);
+        creditPaymentPage.getPaymentForm().verifySubmitOk();
+        assertTrue(Dao.acceptApprovedCreditPayment());
     }
 
     @Test
     @DisplayName("Оплата тура в кредит с использованием карты со статусом 'DECLINED'")
-    void shouldDeclineCreditPaymentRequestDeclinedCard() throws SQLException {
-        open(URL);
-        StartPage startPage = new StartPage();
-        CreditPaymentPage creditPaymentPage = startPage.buyCredit();
+    void shouldDeclineCreditPaymentRequestDeclinedCard() {
+        CreditPaymentPage creditPaymentPage = new CreditPaymentPage();
         CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getDeclinedCardInfo();
-        creditPaymentPage.submitInfo(cardInfo);
-        creditPaymentPage.verifySubmitDecline();
-        assertEquals("DECLINED", Dao.getLastCreditPaymentStatus());
-        assertEquals(Dao.getLastOrderId(), Dao.getLastBankId());
+        creditPaymentPage.getPaymentTypeSwitcher().buyCredit();
+        creditPaymentPage.getPaymentForm().submitInfo(cardInfo);
+        creditPaymentPage.getPaymentForm().verifySubmitDecline();
+        assertTrue(Dao.acceptDeclinedCreditPayment());
     }
 
     @Test
     @DisplayName("Оплата тура в кредит с использованием неизвестной карты")
-    void shouldDeclineCreditPaymentRequestUnknownCard() throws SQLException {
-        open(URL);
+    void shouldDeclineCreditPaymentRequestUnknownCard() {
         Dao.clearAllTables();
-        StartPage startPage = new StartPage();
-        CreditPaymentPage creditPaymentPage = startPage.buyCredit();
+        CreditPaymentPage creditPaymentPage = new CreditPaymentPage();
         CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getUnknownCardInfo();
-        creditPaymentPage.submitInfo(cardInfo);
-        creditPaymentPage.verifySubmitDecline();
-        assertEquals(Dao.getLastCreditPaymentStatus(), "table is empty");
-        assertEquals(Dao.getLastOrderId(), "table is empty");
+        creditPaymentPage.getPaymentTypeSwitcher().buyCredit();
+        creditPaymentPage.getPaymentForm().submitInfo(cardInfo);
+        creditPaymentPage.getPaymentForm().verifySubmitDecline();
+        assertTrue(Dao.acceptDeclinedCreditPayment());
     }
 
     @Test
     @DisplayName("Оплата тура с использование карты неверного формата")
     void shouldDeclineRequestForCardWrongFormat() {
-        open(URL);
-        StartPage startPage = new StartPage();
-        CreditPaymentPage creditPaymentPage = startPage.buyCredit();
+        PaymentPage paymentPage = new PaymentPage();
         CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getApprovedCardInfo();
         Faker faker = new Faker();
         cardInfo.setCardNumber(faker.finance().creditCard(CreditCardType.AMERICAN_EXPRESS));
-        creditPaymentPage.submitInfo(cardInfo);
-        creditPaymentPage.verifyWrongCardFormat();
+        paymentPage.getPaymentTypeSwitcher().buy();
+        paymentPage.getPaymentForm().submitInfo(cardInfo);
+        paymentPage.getPaymentForm().verifyWrongCardFormat();
     }
 
     @Test
     @DisplayName("Оплата тура. Месяц введен в неправильном формате - 'm' вместо 'mm'")
     void shouldDeclineRequestForMonthWrongFormat() {
-        open(URL);
-        StartPage startPage = new StartPage();
-        CreditPaymentPage creditPaymentPage = startPage.buyCredit();
+        CreditPaymentPage creditPaymentPage = new CreditPaymentPage();
         CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getApprovedCardInfo();
         cardInfo.setMonth("2");
-        creditPaymentPage.submitInfo(cardInfo);
-        creditPaymentPage.verifyWrongMonthFormat();
+        creditPaymentPage.getPaymentTypeSwitcher().buyCredit();
+        creditPaymentPage.getPaymentForm().submitInfo(cardInfo);
+        creditPaymentPage.getPaymentForm().verifyWrongMonthFormat();
     }
 
     @Test
     @DisplayName("Оплата тура. Поле 'Владелец' введено кириллицей")
     void shouldDeclineRequestForOwnerWrongFormatCyrillicInput() {
-        open(URL);
-        StartPage startPage = new StartPage();
-        CreditPaymentPage creditPaymentPage = startPage.buyCredit();
+        CreditPaymentPage creditPaymentPage = new CreditPaymentPage();
         CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getApprovedCardInfo();
         Faker faker = new Faker(new Locale("ru-RU"));
         cardInfo.setOwner(faker.name().fullName());
-        creditPaymentPage.submitInfo(cardInfo);
-        creditPaymentPage.verifyWrongOwnerFormat();
+        creditPaymentPage.getPaymentTypeSwitcher().buyCredit();
+        creditPaymentPage.getPaymentForm().submitInfo(cardInfo);
+        creditPaymentPage.getPaymentForm().verifyWrongOwnerFormat();
     }
 
     @Test
     @DisplayName("Оплата тура. В поле 'Владелец' введены только цифры")
     void shouldDeclineRequestForOwnerWrongFormatNumbersInput() {
-        open(URL);
-        StartPage startPage = new StartPage();
-        CreditPaymentPage creditPaymentPage = startPage.buyCredit();
+        CreditPaymentPage creditPaymentPage = new CreditPaymentPage();
         CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getApprovedCardInfo();
         cardInfo.setOwner("3123124");
-        creditPaymentPage.submitInfo(cardInfo);
-        creditPaymentPage.verifyWrongOwnerFormat();
+        creditPaymentPage.getPaymentTypeSwitcher().buyCredit();
+        creditPaymentPage.getPaymentForm().submitInfo(cardInfo);
+        creditPaymentPage.getPaymentForm().verifyWrongOwnerFormat();
     }
 
     @Test
     @DisplayName("Оплата тура. В поле 'Владелец' введены спецсимволы")
     void shouldDeclineRequestForOwnerWrongFormatInputSpecialCharsInput() {
-        open(URL);
-        StartPage startPage = new StartPage();
-        CreditPaymentPage creditPaymentPage = startPage.buyCredit();
+        PaymentPage paymentPage = new PaymentPage();
         CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getApprovedCardInfo();
         cardInfo.setOwner("!!!%%%%%???");
-        creditPaymentPage.submitInfo(cardInfo);
-        creditPaymentPage.verifyWrongOwnerFormat();
+        paymentPage.getPaymentTypeSwitcher().buy();
+        paymentPage.getPaymentForm().submitInfo(cardInfo);
+        paymentPage.getPaymentForm().verifyWrongOwnerFormat();
     }
 
     @Test
     @DisplayName("Оплата тура картой, действие которой закончилось")
     void shouldDeclineRequestForExpiderCard() {
-        open(URL);
-        StartPage startPage = new StartPage();
-        CreditPaymentPage creditPaymentPage = startPage.buyCredit();
+        PaymentPage paymentPage = new PaymentPage();
         CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getApprovedCardInfo();
         cardInfo.setYear(Integer.valueOf(LocalDate.now().minusYears(2).format(DateTimeFormatter.ofPattern("yy"))));
-        creditPaymentPage.submitInfo(cardInfo);
-        creditPaymentPage.verifyYearExpired();
+        paymentPage.getPaymentTypeSwitcher().buy();
+        paymentPage.getPaymentForm().submitInfo(cardInfo);
+        paymentPage.getPaymentForm().verifyYearExpired();
     }
 
     @Test
     @DisplayName("Оплата тура. В поле 'CVV' введен слишком короткий код")
     void shouldDeclineRequestForWrongCvv() {
-        open(URL);
-        StartPage startPage = new StartPage();
-        CreditPaymentPage creditPaymentPage = startPage.buyCredit();
+        PaymentPage paymentPage = new PaymentPage();
         CardInfo cardInfo = new CardInfo();
         cardInfo = cardInfo.getApprovedCardInfo();
         Faker faker = new Faker();
         cardInfo.setCvv(faker.number().numberBetween(10, 99));
-        creditPaymentPage.submitInfo(cardInfo);
-        creditPaymentPage.verifyWrongCvv();
+        paymentPage.getPaymentTypeSwitcher().buy();
+        paymentPage.getPaymentForm().submitInfo(cardInfo);
+        paymentPage.getPaymentForm().verifyWrongCvv();
     }
 
 }

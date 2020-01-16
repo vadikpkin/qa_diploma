@@ -13,45 +13,30 @@ import java.util.concurrent.TimeUnit;
 public class CardInfo {
     private static String approvedCardNumber = "4444 4444 4444 4441";
     private static String declinedCardNumber = "4444 4444 4444 4442";
-    String cardNumber;
-    String month;
-    int year;
-    String owner;
-    int cvv;
+    private static Faker faker = new Faker(new Locale("en-US"));
+
+    private Date date = faker.date().future(1000, TimeUnit.DAYS);
+    private String month = new SimpleDateFormat("MM").format(date);
+    private int year = Integer.parseInt(new SimpleDateFormat("yy").format(date));
+    private String owner = faker.name().fullName();
+    private int cvv = faker.number().numberBetween(100, 999);
+    private String cardNumber;
 
     public CardInfo getApprovedCardInfo() {
         CardInfo cardInfo = new CardInfo();
         cardInfo.setCardNumber(approvedCardNumber);
-        Faker faker = new Faker(new Locale("en-US"));
-        Date date = faker.date().future(1000, TimeUnit.DAYS);
-        cardInfo.setMonth(new SimpleDateFormat("MM").format(date));
-        cardInfo.setYear(Integer.parseInt(new SimpleDateFormat("yy").format(date)));
-        cardInfo.setOwner(faker.name().fullName());
-        cardInfo.setCvv(faker.number().numberBetween(100, 999));
         return cardInfo;
     }
 
     public CardInfo getDeclinedCardInfo() {
         CardInfo cardInfo = new CardInfo();
         cardInfo.setCardNumber(declinedCardNumber);
-        Faker faker = new Faker(new Locale("en-US"));
-        Date date = faker.date().future(1000, TimeUnit.DAYS);
-        cardInfo.setMonth(new SimpleDateFormat("MM").format(date));
-        cardInfo.setYear(Integer.parseInt(new SimpleDateFormat("yy").format(date)));
-        cardInfo.setOwner(faker.name().fullName());
-        cardInfo.setCvv(faker.number().numberBetween(100, 999));
         return cardInfo;
     }
 
     public CardInfo getUnknownCardInfo() {
         CardInfo cardInfo = new CardInfo();
-        Faker faker = new Faker(new Locale("en-US"));
         cardInfo.setCardNumber(faker.finance().creditCard(CreditCardType.MASTERCARD));
-        Date date = faker.date().future(1000, TimeUnit.DAYS);
-        cardInfo.setMonth(new SimpleDateFormat("MM").format(date));
-        cardInfo.setYear(Integer.parseInt(new SimpleDateFormat("yy").format(date)));
-        cardInfo.setOwner(faker.name().fullName());
-        cardInfo.setCvv(faker.number().numberBetween(100, 999));
         return cardInfo;
     }
 

@@ -1,69 +1,57 @@
 package database;
 
+import data.Status;
 import java.sql.*;
-import java.util.ArrayList;
 
 public class Dao {
+    private Dao() {
+    }
 
-    public static void clearTable(String tableName) throws SQLException {
+    public static void clearAllTables(){
         try (Connection cn = ConnectionFactory.getConnection();
-             Statement st = cn.createStatement()) {
-            st.executeUpdate("delete from " + tableName + ";");
+             Statement st1 = cn.createStatement();
+             Statement st2 = cn.createStatement();
+             Statement st3 = cn.createStatement();) {
+             st1.executeUpdate("delete from payment_entity;");
+             st2.executeUpdate("delete from credit_request_entity;");
+             st3.executeUpdate("delete from order_entity;");
+        } catch (SQLException e){
+            throw new RuntimeException("failed to co execute statement");
         }
     }
 
-    private static String getLast(String tableName, String columnName) throws SQLException {
-        try (Connection cn = ConnectionFactory.getConnection();
-             Statement st = cn.createStatement()) {
-            try (ResultSet rs = st.executeQuery("select " + columnName + " from " + tableName + " order by created;")) {
-                ArrayList<String> codes = new ArrayList<>();
-                while (rs.next()) {
-                    codes.add(rs.getString(columnName));
-                }
-
-                if (codes.isEmpty()) return "table is empty";
-
-                return codes.get(codes.size() - 1);
+    public static boolean checkPayment(Status status, String tableName, String columnName) {
+        try(Connection cn = ConnectionFactory.getConnection();
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM order_entity INNER JOIN " + tableName)
+        ) {
+            int i = 0;
+            while (rs.next()){
+                i++;
             }
+            rs.beforeFirst();
+            rs.next();
+            return rs.getString(columnName).equals(rs.getString("payment_id")) &
+                rs.getString("status").equals(status.toString()) & i==1;
+        }catch (SQLException e){
+            throw new RuntimeException("failed to execute query");
         }
     }
 
-    public static String getLastPaymentStatus() throws SQLException {
-        return getLast("payment_entity", "status");
+    public static boolean acceptApprovedPayment(){
+        return checkPayment(Status.APPROVED,"payment_entity", "transaction_id");
     }
 
-    public static String getLastCreditPaymentStatus() throws SQLException {
-        return getLast("credit_request_entity", "status");
+    public static boolean acceptDeclinedPayment(){
+        return checkPayment(Status.DECLINED, "payment_entity", "transaction_id");
     }
 
-    public static String getLastTransactionId() throws SQLException {
-        return getLast("payment_entity", "transaction_id");
+    public static boolean acceptDeclinedCreditPayment(){
+        return checkPayment(Status.DECLINED, "credit_request_entity", "bank_id");
     }
 
-    public static String getLastBankId() throws SQLException {
-        return getLast("credit_request_entity", "bank_id");
-    }
-
-    public static String getLastOrderId() throws SQLException {
-        return getLast("order_entity", "payment_id");
-    }
-
-    public static void clearOrderEntityTable() throws SQLException {
-        clearTable("order_entity");
-    }
-
-    public static void clearCreditRequestEntityTable() throws SQLException {
-        clearTable("credit_request_entity");
-    }
-
-    public static void clearPaymentEntityTable() throws SQLException {
-        clearTable("payment_entity");
-    }
-
-    public static void clearAllTables() throws SQLException {
-        clearPaymentEntityTable();
-        clearCreditRequestEntityTable();
-        clearOrderEntityTable();
+    public static boolean acceptApprovedCreditPayment(){
+        return checkPayment(Status.APPROVED, "credit_request_entity", "bank_id");
     }
 
 }

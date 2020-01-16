@@ -5,17 +5,15 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.*;
 
-public class StartPage {
+public class PaymentTypeSwitcher {
     private static final SelenideElement buyCreditBtn = $(new Selectors.ByText("Купить в кредит"));
     private static final SelenideElement buyBtn = $(new Selectors.ByText("Купить"));
 
-    public CreditPaymentPage buyCredit() {
+    public void buyCredit() {
         buyCreditBtn.click();
-        return new CreditPaymentPage();
     }
 
-    public PaymentPage buy() {
+    public void buy() {
         buyBtn.click();
-        return new PaymentPage();
     }
 }
