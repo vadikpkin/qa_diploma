@@ -4,7 +4,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selectors;
 import com.codeborne.selenide.SelenideElement;
 import data.CardInfo;
-import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -16,8 +15,8 @@ public class PaymentForm {
     private static SelenideElement owner = $$(".input__control").get(3);
     private static SelenideElement cvv = $("[placeholder='999']");
     private static SelenideElement submitBtn = $(new Selectors.ByText("Продолжить"));
-    private static SelenideElement okNotification = $(By.className("notification_status_ok"));
-    private static SelenideElement errorNotification = $(By.className("notification_status_error"));
+    private static SelenideElement okNotification = $(".notification_status_ok");
+    private static SelenideElement errorNotification = $(".notification_status_error");
     private static SelenideElement wrongCardFormatNotification = $(".input__sub");
     private static SelenideElement wrongMonthFormatNotification = $(".input__sub");
     private static SelenideElement expiredYearNotification = $(".input__sub");
