@@ -1,0 +1,83 @@
+{
+  "uid" : "d53e2b755c346889",
+  "name" : "Оплата тура. Месяц введен в неправильном формате - 'm' вместо 'mm'",
+  "fullName" : "MainTest.shouldDeclineRequestForMonthWrongFormat",
+  "historyId" : "b26ea4c2a4cc8f6c460410830a05320c",
+  "time" : {
+    "start" : 1579535054294,
+    "stop" : 1579535055766,
+    "duration" : 1472
+  },
+  "description" : "",
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "host",
+    "value" : "vadim-B85M-D3V"
+  }, {
+    "name" : "thread",
+    "value" : "12817@vadim-B85M-D3V.Test worker(12)"
+  }, {
+    "name" : "framework",
+    "value" : "junit-platform"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "package",
+    "value" : "MainTest"
+  }, {
+    "name" : "testClass",
+    "value" : "MainTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "shouldDeclineRequestForMonthWrongFormat"
+  }, {
+    "name" : "suite",
+    "value" : "MainTest"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "535bc9de630abe18",
+      "status" : "passed",
+      "time" : {
+        "start" : 1579527259717,
+        "stop" : 1579527261217,
+        "duration" : 1500
+      }
+    }, {
+      "uid" : "fda6fd12e9529bf4",
+      "status" : "broken",
+      "statusDetails" : "chrome not reachable\n  (Session info: chrome=79.0.3945.88)\nBuild info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'\nSystem info: host: 'vadim-B85M-D3V', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '5.3.0-26-generic', java.version: '11.0.5'\nDriver info: org.openqa.selenium.chrome.ChromeDriver\nselenide.url: http://localhost:8080/\nCapabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 79.0.3945.88, chrome: {chromedriverVersion: 79.0.3945.36 (3582db32b3389..., userDataDir: /tmp/.com.google.Chrome.fFpQm6}, goog:chromeOptions: {debuggerAddress: localhost:45799}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify}\nselenide.baseUrl: http://localhost:8080\nSession ID: 0908ddf49609c9a739a0e2f3e613a3a7",
+      "time" : {
+        "start" : 1579527152492,
+        "stop" : 1579527152519,
+        "duration" : 27
+      }
+    }, {
+      "uid" : "ea6e5c58d403d3c0",
+      "status" : "broken",
+      "statusDetails" : "failed to connect to db",
+      "time" : {
+        "start" : 1579527096440,
+        "stop" : 1579527096442,
+        "duration" : 2
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "d53e2b755c346889.json",
+  "parameterValues" : [ ]
+}

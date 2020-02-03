@@ -1,0 +1,174 @@
+{
+  "uid" : "b1a8273437954620fa374b796ffaacdd",
+  "children" : [ {
+    "name" : "Оплата тура в кредит с использованием карты со статусом 'APPROVED'",
+    "uid" : "2df6ed6f5a902e10",
+    "parentUid" : "b1a8273437954620fa374b796ffaacdd",
+    "status" : "passed",
+    "time" : {
+      "start" : 1579534945368,
+      "stop" : 1579534969553,
+      "duration" : 24185
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "parameters" : [ ]
+  }, {
+    "name" : "Оплата тура в кредит с использованием неизвестной карты",
+    "uid" : "18f15e71fbc19e82",
+    "parentUid" : "b1a8273437954620fa374b796ffaacdd",
+    "status" : "failed",
+    "time" : {
+      "start" : 1579534969732,
+      "stop" : 1579534984927,
+      "duration" : 15195
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "parameters" : [ ]
+  }, {
+    "name" : "Оплата тура. В поле 'Владелец' введены спецсимволы",
+    "uid" : "c30533dbb0d410e6",
+    "parentUid" : "b1a8273437954620fa374b796ffaacdd",
+    "status" : "failed",
+    "time" : {
+      "start" : 1579534984949,
+      "stop" : 1579534990666,
+      "duration" : 5717
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "parameters" : [ ]
+  }, {
+    "name" : "Оплата тура. В поле 'CVV' введен слишком короткий код",
+    "uid" : "ade00c41b75e2018",
+    "parentUid" : "b1a8273437954620fa374b796ffaacdd",
+    "status" : "passed",
+    "time" : {
+      "start" : 1579534990670,
+      "stop" : 1579534991882,
+      "duration" : 1212
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "parameters" : [ ]
+  }, {
+    "name" : "Оплата тура картой, действие которой закончилось",
+    "uid" : "b43bf5fd7e29c080",
+    "parentUid" : "b1a8273437954620fa374b796ffaacdd",
+    "status" : "passed",
+    "time" : {
+      "start" : 1579534991886,
+      "stop" : 1579534993241,
+      "duration" : 1355
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "parameters" : [ ]
+  }, {
+    "name" : "Оплата тура. Поле 'Владелец' введено кириллицей",
+    "uid" : "14b2ae7c1407a162",
+    "parentUid" : "b1a8273437954620fa374b796ffaacdd",
+    "status" : "failed",
+    "time" : {
+      "start" : 1579534993245,
+      "stop" : 1579534998875,
+      "duration" : 5630
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "parameters" : [ ]
+  }, {
+    "name" : "Оплата тура с использованием неизвестной карты.",
+    "uid" : "764255ae42754920",
+    "parentUid" : "b1a8273437954620fa374b796ffaacdd",
+    "status" : "failed",
+    "time" : {
+      "start" : 1579534998880,
+      "stop" : 1579535009586,
+      "duration" : 10706
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "parameters" : [ ]
+  }, {
+    "name" : "Оплата тура с использованием карты со статусом 'DECLINED'.",
+    "uid" : "b612ccf8687e566a",
+    "parentUid" : "b1a8273437954620fa374b796ffaacdd",
+    "status" : "failed",
+    "time" : {
+      "start" : 1579535009590,
+      "stop" : 1579535026125,
+      "duration" : 16535
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "parameters" : [ ]
+  }, {
+    "name" : "Оплата тура с использование карты неверного формата",
+    "uid" : "f48b93d962f67709",
+    "parentUid" : "b1a8273437954620fa374b796ffaacdd",
+    "status" : "passed",
+    "time" : {
+      "start" : 1579535026129,
+      "stop" : 1579535027742,
+      "duration" : 1613
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "parameters" : [ ]
+  }, {
+    "name" : "Оплата тура в кредит с использованием карты со статусом 'DECLINED'",
+    "uid" : "fc5d668da7c6bfa1",
+    "parentUid" : "b1a8273437954620fa374b796ffaacdd",
+    "status" : "failed",
+    "time" : {
+      "start" : 1579535027746,
+      "stop" : 1579535044175,
+      "duration" : 16429
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "parameters" : [ ]
+  }, {
+    "name" : "Оплата тура с использованием карты со статусом 'APPROVED'",
+    "uid" : "bd4045d4998c0ae5",
+    "parentUid" : "b1a8273437954620fa374b796ffaacdd",
+    "status" : "passed",
+    "time" : {
+      "start" : 1579535044179,
+      "stop" : 1579535054291,
+      "duration" : 10112
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "parameters" : [ ]
+  }, {
+    "name" : "Оплата тура. Месяц введен в неправильном формате - 'm' вместо 'mm'",
+    "uid" : "d53e2b755c346889",
+    "parentUid" : "b1a8273437954620fa374b796ffaacdd",
+    "status" : "passed",
+    "time" : {
+      "start" : 1579535054294,
+      "stop" : 1579535055766,
+      "duration" : 1472
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "parameters" : [ ]
+  }, {
+    "name" : "Оплата тура. В поле 'Владелец' введены только цифры",
+    "uid" : "5fed9d23efec2f67",
+    "parentUid" : "b1a8273437954620fa374b796ffaacdd",
+    "status" : "failed",
+    "time" : {
+      "start" : 1579535055769,
+      "stop" : 1579535061072,
+      "duration" : 5303
+    },
+    "flaky" : false,
+    "newFailed" : false,
+    "parameters" : [ ]
+  } ],
+  "name" : "behaviors"
+}

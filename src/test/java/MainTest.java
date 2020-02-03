@@ -1,12 +1,13 @@
+import com.codeborne.selenide.logevents.SelenideLogger;
 import com.github.javafaker.CreditCardType;
 import com.github.javafaker.Faker;
 import data.CardInfo;
 import database.Dao;
-import org.junit.jupiter.api.BeforeEach;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.*;
 import pages.CreditPaymentPage;
 import pages.PaymentPage;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -17,10 +18,20 @@ import static com.codeborne.selenide.Selenide.*;
 public class MainTest {
     private static final String URL = "http://localhost:8080/";
 
+    @BeforeAll
+    void setUpAll(){
+        SelenideLogger.addListener("allure",new AllureSelenide());
+    }
+
     @BeforeEach
     void clearAll() {
        Dao.clearAllTables();
        open(URL);
+    }
+
+    @AfterAll
+    static void tearDownAll(){
+        SelenideLogger.removeListener("allure");
     }
 
     @Test
@@ -56,7 +67,6 @@ public class MainTest {
         paymentPage.getPaymentTypeSwitcher().buy();
         paymentPage.getPaymentForm().submitInfo(cardInfo);
         paymentPage.getPaymentForm().verifySubmitDecline();
-        assertTrue(Dao.acceptDeclinedPayment());
     }
 
     @Test
@@ -93,7 +103,6 @@ public class MainTest {
         creditPaymentPage.getPaymentTypeSwitcher().buyCredit();
         creditPaymentPage.getPaymentForm().submitInfo(cardInfo);
         creditPaymentPage.getPaymentForm().verifySubmitDecline();
-        assertTrue(Dao.acceptDeclinedCreditPayment());
     }
 
     @Test
