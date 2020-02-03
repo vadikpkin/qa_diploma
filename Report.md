@@ -7,18 +7,18 @@
 #####**_Процент успешных тест-кейсов:_** 46%, подробный Allure отчет по пройденным тест-кейсам может быть найден по [ссылке](https://github.com/vadikpkin/qa_diploma/tree/master/build/reports/allure-report).
 ## Общие рекомендации
 По итогам тестирования можно выделить несколько багов, некоторые из которых критически влияют на работу системы.
- * Critical баги:
+ * High-priority баги:
    * [A success message pops up instead of a failure message during payment by card with status 'DECLINED'.](https://github.com/vadikpkin/qa_diploma/issues/2)
    * [A success message pops up instead of a failure message during payment by CREDIT card with status 'DECLINED'.](https://github.com/vadikpkin/qa_diploma/issues/3)
    * [Both success and failure messages pop up during payment by card with no status.](https://github.com/vadikpkin/qa_diploma/issues/4)
    * [Both success and failure messages pop up during payment by CREDIT card with no status.](https://github.com/vadikpkin/qa_diploma/issues/5)
- * Medium баги:
+ * Medium-priority баги:
  
       Баги валидарии поля 'Владелец':
    * [Payment with cirilyc chars in 'Owner' filed can be submitted.](https://github.com/vadikpkin/qa_diploma/issues/7)
    * [Payment with digits in 'Owner' filed can be submitted.](https://github.com/vadikpkin/qa_diploma/issues/8)
    * [Payment with special chars in 'Owner' filed can be submitted.](https://github.com/vadikpkin/qa_diploma/issues/9)
- * Medium/minor баги:
+ * Low-priority баги:
    * [Text 'Wrong format' does not disappear after correct enter.](https://github.com/vadikpkin/qa_diploma/issues/11)
    * [Spelling mistake in word 'Маракэш' on startpage.](https://github.com/vadikpkin/qa_diploma/issues/6)
    
