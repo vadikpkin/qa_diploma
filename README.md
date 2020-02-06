@@ -8,7 +8,7 @@ To check testing report go to [Report.md](https://github.com/vadikpkin/qa_diplom
 
 ### Automation report
 
-To check automation report go to [Plan.md](https://github.com/vadikpkin/qa_diploma/blob/master/Plan.md)
+To check automation report go to [Summary.md](https://github.com/vadikpkin/qa_diploma/blob/master/Summary.md)
 
 
 
