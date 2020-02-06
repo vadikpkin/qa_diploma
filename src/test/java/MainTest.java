@@ -15,6 +15,7 @@ import java.util.Locale;
 import static org.junit.jupiter.api.Assertions.*;
 import static com.codeborne.selenide.Selenide.*;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class MainTest {
     private static final String URL = "http://localhost:8080/";
 
