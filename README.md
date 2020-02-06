@@ -1,3 +1,16 @@
+### Testing plan
+
+To check testing plan go to [Plan.md](https://github.com/vadikpkin/qa_diploma/blob/master/Plan.md)
+
+### Testing report
+
+To check testing report go to [Report.md](https://github.com/vadikpkin/qa_diploma/blob/master/Report.md)
+
+### Automation report
+
+To check automation report go to [Plan.md](https://github.com/vadikpkin/qa_diploma/blob/master/Plan.md)
+
+
 
 ### How to start:
 
@@ -54,7 +67,3 @@
   ./gradlew test -Ddb.url=jdbc:postgresql://localhost:5432/app
   ```
   6 . check report at /build/reports/tests/test/index.html
-
-### Testing plan
-
-To check testing plan go to [Plan.md](https://github.com/vadikpkin/qa_diploma/blob/master/Plan.md)
